@@ -45,7 +45,7 @@ class HelpQuestionScreen extends StatelessWidget {
           ),
           backgroundColor:Colors.transparent,
           bottomNavigationBar: SizedBox(
-            height: 70,
+            height: 50,
             width: double.infinity,
             child: Padding(
               padding: EdgeInsets.only(bottom: 5,left: 15,right: 15),

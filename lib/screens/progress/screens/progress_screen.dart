@@ -28,7 +28,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
   @override
   Widget build(BuildContext context) {
     final progressScreenController = Get.put(ProgressScreenController());
-    final bool showGoals = !progressScreenController.goalLevelsList.isNotEmpty;
+    final bool showGoals = progressScreenController.goalLevelsList.isNotEmpty;
     final bool showDescription = progressScreenController.chartData.isEmpty;
 
     return Scaffold(
@@ -144,7 +144,9 @@ class _ProgressScreenState extends State<ProgressScreen> {
                       child: Align(
                           alignment: Alignment.topRight,
                           child: TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                progressScreenController.showSelectGoalsBottomSheet();
+                              },
                               child: AutoSizeText(
                                   minFontSize: 8,
                                   style: TextStyle(fontSize: 15),
@@ -191,7 +193,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                         onPressed: () {
                           // Add your onPressed logic here
                           progressScreenController.showSelectGoalsBottomSheet();
-                          print('Set goals button pressed!');
+                          // print('Set goals button pressed!');
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.black, // Dark grey background

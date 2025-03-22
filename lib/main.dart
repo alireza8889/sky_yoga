@@ -3,8 +3,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skyyoga/controller/auth_controller/auth_controller.dart';
+import 'package:skyyoga/screens/auth/login/login_auth.dart';
 import 'package:skyyoga/screens/exercise/screens/exercise_screen.dart';
 import 'package:skyyoga/screens/exercise/screens/help_question_screen.dart';
+import 'package:skyyoga/screens/profile_screen/profile_screen.dart';
 import 'package:skyyoga/screens/progress/screens/progress_screen.dart';
 
 void main() async {

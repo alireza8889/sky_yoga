@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:skyyoga/components/text_style.dart';
 
@@ -48,12 +49,9 @@ class SuggestedExerciseWidgetItem extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius:
                           BorderRadius.circular(10), // Rounded corners
-                      image: DecorationImage(
-                        image: NetworkImage(
-                            imageUrl), // Replace with your image URL
-                        fit: BoxFit.cover, // Cover the container
-                      ),
+                   
                     ),
+                    child: CachedNetworkImage(imageUrl: imageUrl,fit: BoxFit.fill,),
                   ),
                 ),
               ),

@@ -23,7 +23,7 @@ class HelpQuestionWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 14.0),
             child: Container(
-              color: Colors.orange,
+              // color: Colors.orange,
               height: AppDeviceUtils.getScreenheight() * 0.07,
               width: double.infinity,
               // padding: EdgeInsets.symmetric(horizontal: 8.0),
