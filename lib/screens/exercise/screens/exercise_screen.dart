@@ -21,8 +21,8 @@ class ExerciseScreen extends StatelessWidget {
     final exerciseController = Get.put(ExerciseScreenController());
     final showPastExercise = exerciseController.pastExercises.isNotEmpty;
     final showSuggestedExercise =
-        !(exerciseController.allSuggestedExercise.isNotEmpty &&
-            exerciseController.allSuggestedExercise.isNotEmpty);
+        (exerciseController.allSuggestedExercise.isNotEmpty &&
+            exerciseController.helpQuestionAnswered.value);
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
