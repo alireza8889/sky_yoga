@@ -51,7 +51,9 @@ class SuggestedExerciseWidgetItem extends StatelessWidget {
                           BorderRadius.circular(10), // Rounded corners
                    
                     ),
-                    child: CachedNetworkImage(imageUrl: imageUrl,fit: BoxFit.fill,),
+                    child: CachedNetworkImage(
+                      width: 180,
+                      imageUrl: imageUrl,fit: BoxFit.fill,),
                   ),
                 ),
               ),
@@ -62,12 +64,16 @@ class SuggestedExerciseWidgetItem extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      AutoSizeText(title,
-                          textAlign: TextAlign.start,
-                          minFontSize: 10,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: AppTextStyle.suggestedExerciseItemTilteStyle),
+                      Expanded(
+
+                        child: AutoSizeText(title,
+                            textAlign: TextAlign.start,
+                            minFontSize: 10,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: AppTextStyle.suggestedExerciseItemTilteStyle),
+                        flex: 2,
+                      ),
                       Expanded(
                         child: AutoSizeText(
                           textAlign: TextAlign.start,
@@ -78,6 +84,7 @@ class SuggestedExerciseWidgetItem extends StatelessWidget {
                           description, // Add your description
                           style: AppTextStyle.exerciseScreenDescriptionStyle,
                         ),
+                        flex: 3,
                       ),
                     ],
                   ),

@@ -269,4 +269,12 @@ class AppTextStyle {
       fontWeight: FontWeight.normal,
       color:AppTextColor.chartLabelColor);
 
+
+  //today
+  static final setMoodButtonTextStyle=GoogleFonts.openSans(
+      fontSize: 14,
+      fontStyle: FontStyle.normal,
+      fontWeight: FontWeight.bold,
+      color:AppTextColor.setMoodButtonTextColor);
+
 }

@@ -12,4 +12,11 @@ class ApiUrlConstant {
   static const postOtpResetPassword =
       '$baseUrl/api/v1/users/reset-password/verify-otp/';
   static const postGoogleLogin = '$baseUrl/api/v1/users/auth/google/';
+
+
+  //exetcise screen
+  static const getAllHelpQuestion = '$baseUrl/api/v1/users/recommended-positions/capable/';
+  static const sendHelpQuestionAnswersVideoId = '$baseUrl/api/v1/users/records/';
+
+  static const getAllSuggestedExercise = '$baseUrl/api/v1/users/recommended-positions/capable/';
 }

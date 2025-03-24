@@ -6,8 +6,8 @@ import 'package:skyyoga/controller/auth_controller/auth_controller.dart';
 import 'package:skyyoga/screens/auth/login/login_auth.dart';
 import 'package:skyyoga/screens/exercise/screens/exercise_screen.dart';
 import 'package:skyyoga/screens/exercise/screens/help_question_screen.dart';
-import 'package:skyyoga/screens/profile_screen/profile_screen.dart';
 import 'package:skyyoga/screens/progress/screens/progress_screen.dart';
+import 'package:skyyoga/screens/today/screens/mood_selection_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,17 +15,17 @@ void main() async {
   final authController = Get.put(AuthController());
   await authController.checkLoginStatus();
 
-  runApp(
-    const MyApp(),
-  );
-}
-//       runApp(
-//         DevicePreview(
-//           enabled: !kReleaseMode,
-//           builder: (context) => MyApp(), // Wrap your app
-//         ),
-//       );
+//   runApp(
+//     const MyApp(),
+//   );
 // }
+      runApp(
+        DevicePreview(
+          enabled: !kReleaseMode,
+          builder: (context) => MyApp(), // Wrap your app
+        ),
+      );
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -45,8 +45,8 @@ class MyApp extends StatelessWidget {
       home: Obx(
         () {
           final authController = Get.find<AuthController>();
-          return authController.isLoggedIn.value
-              ? ExerciseScreen()
+          return !authController.isLoggedIn.value
+              ? MoodSelectionScreen()
               : ProgressScreen();
         },
       ),

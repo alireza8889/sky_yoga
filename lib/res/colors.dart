@@ -64,6 +64,9 @@ class AppTextColor {
   static const Color chartLabelColor = Color(0xff000000);
 
 
+  //today
+  static const Color setMoodButtonTextColor = Color(0xfffffefe);
+
 }
 
 class AppWidgetColor {
@@ -121,11 +124,40 @@ class AppWidgetColor {
   static const Color helpQuestionScreenbackgroundColor = Color(0xca2D2132);
   static const Color helpQuestionScreenbackgroundColor2 = Color(0xca191E20);
 
+  static List<Color> gradientBackgroundHelpQuestionScreen = [
+    AppWidgetColor.helpQuestionScreenbackgroundColor,
+    AppWidgetColor.helpQuestionScreenbackgroundColor,
+    AppWidgetColor.helpQuestionScreenbackgroundColor2,
+    AppWidgetColor.helpQuestionScreenbackgroundColor2,
+    AppWidgetColor.helpQuestionScreenbackgroundColor2,
+    AppWidgetColor.helpQuestionScreenbackgroundColor2,
+  ];
+
 
   //select gaols screen
   static const Color selectGoalsScreenNotActiveButton = Color(0xca8D8E96);
   static const Color selectGoalsScreenActiveButton = Color(0xca343F66);
 
+
+
+  //today
+  static const Color selectMoodsButtonGradient1 = Color(0x7effffff);
+  static const Color selectMoodsButtonGradient2 = Color(0xffffff);
+  static List<Color> selectMoodsButtonGradient = [
+    AppWidgetColor.selectMoodsButtonGradient1,
+    AppWidgetColor.selectMoodsButtonGradient2,
+
+  ];
+  static const Color selectMoodsScreenGradient1 = Color(0xfd2894f8);
+  static const Color selectMoodsScreenGradient2 = Color(0xffffffff);
+  static List<Color> selectMoodsScreenGradient = [
+
+    AppWidgetColor.selectMoodsScreenGradient1,
+    AppWidgetColor.selectMoodsScreenGradient2,
+
+  ];
+
+  static const Color setMoodButtonBackGround = Color(0xff191d2d);
 
 
 }

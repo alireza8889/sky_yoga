@@ -12,85 +12,66 @@ class HelpQuestionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final helpQuestionScreenController =
         Get.put(HelpQuestionScreenController());
-    return Stack(
-      children:[
-        Container(
-          decoration: BoxDecoration(
+    return Stack(children: [
+      Container(
+        decoration: BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.topRight,
-                end:Alignment.bottomLeft,
-                colors: [
-              AppWidgetColor.helpQuestionScreenbackgroundColor,
-              AppWidgetColor.helpQuestionScreenbackgroundColor,
-              AppWidgetColor.helpQuestionScreenbackgroundColor2,
-              AppWidgetColor.helpQuestionScreenbackgroundColor2,
-              AppWidgetColor.helpQuestionScreenbackgroundColor2,
-              AppWidgetColor.helpQuestionScreenbackgroundColor2,
+                end: Alignment.bottomLeft,
+                colors:
+              AppWidgetColor.gradientBackgroundHelpQuestionScreen,
 
-            ])
-          ),
-        ),
-       SafeArea(
-         child: Scaffold(
+            )),
+      ),
+      SafeArea(
+        child: Scaffold(
           appBar: AppBar(
             foregroundColor: Colors.white,
             backgroundColor: Colors.transparent,
             leading: IconButton(
-                onPressed: (){
+                onPressed: () {
                   Get.back();
                   print('back to exercise screen');
                 },
                 icon: Icon(Icons.arrow_back_ios_new)),
             title: Text('Sky'),
           ),
-          backgroundColor:Colors.transparent,
-          bottomNavigationBar: SizedBox(
-            height: 50,
-            width: double.infinity,
-            child: Padding(
-              padding: EdgeInsets.only(bottom: 5,left: 15,right: 15),
-              //Continue button
-              child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppWidgetColor
-                        .helpQuestionScreenContinueButton, // Change button background color
-                    foregroundColor: Colors.white, // Change text color
-                    elevation: 5, // Add shadow
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12), // Rounded corners
-                    ),
-                  ),
-                  onPressed: () {},
-                  child: Text('Continue')),
-            ),
-          ),
+          backgroundColor: Colors.transparent,
+
           body: Padding(
-            padding: const EdgeInsets.only(top: 8.0,left: 8.0,right: 8.0),
+            padding: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
             child: Column(
-         
               children: [
                 Container(
-                  color: Colors.transparent,
-                  height: AppDeviceUtils.getScreenheight()*0.74,
+                  // color: Colors.green,
+                  height: AppDeviceUtils.getScreenheight() * 0.83,
                   width: AppDeviceUtils.getScreenWidth(),
-                  child: PageView.builder(
-                      itemCount:
-                          helpQuestionScreenController.helpQuestionItemList.length,
-                      itemBuilder: (context, index) {
-                        final questionItem =
-                            helpQuestionScreenController.helpQuestionItemList[index];
-                        return HelpQuestionWidget(
-                          question: questionItem.question,
-                          options: questionItem.options,
-                        );
-                      }),
+                  child: Obx(() {
+                    final optionItems =
+                        helpQuestionScreenController.helpQuestionList;
+                    return PageView.builder(
+                        controller: helpQuestionScreenController.pageController,
+                        itemCount: helpQuestionScreenController
+                            .helpQuestionList.length,
+                        itemBuilder: (context, index) {
+                          return Obx(() {
+                            final optionItems = helpQuestionScreenController
+                                .helpQuestionList[index];
+                            return HelpQuestionWidget(
+                              controller: helpQuestionScreenController,
+                              question:
+                                  'Tell us what you can do and we`ll help you to grow ',
+                              options: optionItems.options,
+                            );
+                          });
+                        });
+                  }),
                 ),
               ],
             ),
           ),
-               ),
-       ),
-      ]
-    );
+        ),
+      ),
+    ]);
   }
 }

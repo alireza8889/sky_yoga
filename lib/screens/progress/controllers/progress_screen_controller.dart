@@ -131,7 +131,6 @@ class ProgressScreenController extends GetxController {
       name: 'نام goal8',
     ),
   ].obs;
-
   //get chart data from api
   List<GDPData> getChartData() {
     chartData.value = [
@@ -266,7 +265,11 @@ class ProgressScreenController extends GetxController {
                                           .selectGoalsScreenNotActiveButton,
                                   borderRadius: BorderRadius.circular(15)),
                               height: 45,
-                              child: Center(child: Text('Set goals',style: TextStyle(color: Colors.white),)),
+                              child: Center(
+                                  child: Text(
+                                'Set goals',
+                                style: TextStyle(color: Colors.white),
+                              )),
                             );
                           }),
                         ),
