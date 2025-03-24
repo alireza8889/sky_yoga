@@ -16,12 +16,10 @@ class HelpQuestionScreen extends StatelessWidget {
       Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                colors:
-              AppWidgetColor.gradientBackgroundHelpQuestionScreen,
-
-            )),
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+          colors: AppWidgetColor.gradientBackgroundHelpQuestionScreen,
+        )),
       ),
       SafeArea(
         child: Scaffold(
@@ -37,7 +35,6 @@ class HelpQuestionScreen extends StatelessWidget {
             title: Text('Sky'),
           ),
           backgroundColor: Colors.transparent,
-
           body: Padding(
             padding: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
             child: Column(
@@ -47,25 +44,29 @@ class HelpQuestionScreen extends StatelessWidget {
                   height: AppDeviceUtils.getScreenheight() * 0.83,
                   width: AppDeviceUtils.getScreenWidth(),
                   child: Obx(() {
-                    final optionItems =
-                        helpQuestionScreenController.helpQuestionList;
-                    return PageView.builder(
-                        controller: helpQuestionScreenController.pageController,
-                        itemCount: helpQuestionScreenController
-                            .helpQuestionList.length,
-                        itemBuilder: (context, index) {
-                          return Obx(() {
-                            final optionItems = helpQuestionScreenController
-                                .helpQuestionList[index];
-                            return HelpQuestionWidget(
-                              controller: helpQuestionScreenController,
-                              question:
-                                  'Tell us what you can do and we`ll help you to grow ',
-                              options: optionItems.options,
-                            );
+
+
+                      final optionItems =
+                          helpQuestionScreenController.helpQuestionList;
+                      return PageView.builder(
+                          controller:
+                              helpQuestionScreenController.pageController,
+                          itemCount: helpQuestionScreenController
+                              .helpQuestionList.length,
+                          itemBuilder: (context, index) {
+                            return Obx(() {
+                              final optionItems = helpQuestionScreenController
+                                  .helpQuestionList[index];
+                              return HelpQuestionWidget(
+                                controller: helpQuestionScreenController,
+                                question:
+                                    'Tell us what you can do and we`ll help you to grow ',
+                                options: optionItems.options,
+                              );
+                            });
                           });
-                        });
-                  }),
+                    }
+                  ),
                 ),
               ],
             ),

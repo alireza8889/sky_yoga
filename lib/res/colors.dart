@@ -55,6 +55,8 @@ class AppTextColor {
 
   static const Color exerciseScreenDescription = Color(0xff444444);
   static const Color toUnlockDescription = Color(0xffffffff);
+  static const Color getStartButtonText = Color(0xffffffff);
+
 
 
   //help question screen
@@ -118,6 +120,7 @@ class AppWidgetColor {
   //exercise_screen
   static const Color suggestedBox = Color(0xffbfc5c7);
   static const Color suggestedExerciseItem = Color(0xca656767);
+  static const Color exerciseScreenGetStartButton = Color(0xff000000);
 
   //help question screen
   static const Color helpQuestionScreenContinueButton = Color(0xca343F66);

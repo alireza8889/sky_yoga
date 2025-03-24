@@ -12,7 +12,7 @@ import 'package:skyyoga/screens/today/screens/mood_selection_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  final authController = Get.put(AuthController());
+  final authController = Get.put(AuthController(),permanent: true);
   await authController.checkLoginStatus();
 
 //   runApp(
@@ -45,9 +45,9 @@ class MyApp extends StatelessWidget {
       home: Obx(
         () {
           final authController = Get.find<AuthController>();
-          return !authController.isLoggedIn.value
+          return authController.isLoggedIn.value
               ? MoodSelectionScreen()
-              : ProgressScreen();
+              : ExerciseScreen();
         },
       ),
       // home: Obx(

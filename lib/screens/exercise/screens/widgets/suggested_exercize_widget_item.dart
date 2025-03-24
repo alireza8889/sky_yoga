@@ -3,7 +3,10 @@ import 'dart:ui';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:skyyoga/components/text_strings.dart';
 import 'package:skyyoga/components/text_style.dart';
+import 'package:skyyoga/res/colors.dart';
+import 'package:skyyoga/utils/device_utility.dart';
 
 class SuggestedExerciseWidgetItem extends StatelessWidget {
   final String imageUrl;
@@ -20,22 +23,23 @@ class SuggestedExerciseWidgetItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return // Inside the Column's children:
         Stack(children: [
-          Positioned.fill( // Cover the container with the blur
-            child: ClipRRect( // Clip to the container's rounded corners
-              borderRadius: BorderRadius.circular(15),
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 15.0, sigmaY: 15.0), // Adjust blur intensity
-                child: Container(
-                  color: Colors.transparent, // Necessary for blur to show
-                ),
-              ),
+      Positioned.fill(
+        // Cover the container with the blur
+        child: ClipRRect(
+          // Clip to the container's rounded corners
+          borderRadius: BorderRadius.circular(15),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(
+                sigmaX: 15.0, sigmaY: 15.0), // Adjust blur intensity
+            child: Container(
+              color: Colors.transparent, // Necessary for blur to show
             ),
           ),
+        ),
+      ),
       Container(
         decoration: BoxDecoration(
-            color:Colors.transparent,
-            borderRadius: BorderRadius.circular(15)),
-        width: 200,
+            color: Colors.transparent, borderRadius: BorderRadius.circular(15)),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 10),
           child: Column(
@@ -46,14 +50,12 @@ class SuggestedExerciseWidgetItem extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius:
-                          BorderRadius.circular(10), // Rounded corners
-                   
-                    ),
+                    width: double.infinity,
+                    decoration: BoxDecoration(),
                     child: CachedNetworkImage(
-                      width: 180,
-                      imageUrl: imageUrl,fit: BoxFit.fill,),
+                      imageUrl: imageUrl,
+                      fit: BoxFit.fill,
+                    ),
                   ),
                 ),
               ),
@@ -65,16 +67,17 @@ class SuggestedExerciseWidgetItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
-
+                        flex: 2,
                         child: AutoSizeText(title,
                             textAlign: TextAlign.start,
-                            minFontSize: 10,
+                            minFontSize: 12,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
-                            style: AppTextStyle.suggestedExerciseItemTilteStyle),
-                        flex: 2,
+                            style:
+                                AppTextStyle.suggestedExerciseItemTilteStyle),
                       ),
                       Expanded(
+                        flex: 3,
                         child: AutoSizeText(
                           textAlign: TextAlign.start,
                           overflow: TextOverflow.ellipsis,
@@ -84,30 +87,28 @@ class SuggestedExerciseWidgetItem extends StatelessWidget {
                           description, // Add your description
                           style: AppTextStyle.exerciseScreenDescriptionStyle,
                         ),
-                        flex: 3,
                       ),
                     ],
                   ),
                 ),
               ),
               Expanded(
-                flex: 1,
-                child: SizedBox(
-                  width: double.infinity,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        // Handle "Get start" button press
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.black,
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
+                child: GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: AppWidgetColor.exerciseScreenGetStartButton,
+                    ),
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Text(
+                          AppTexts.getStartButton,
+                          style:
+                              TextStyle(color: AppTextColor.getStartButtonText),
                         ),
                       ),
-                      child: Text('Get start'),
                     ),
                   ),
                 ),
@@ -116,7 +117,6 @@ class SuggestedExerciseWidgetItem extends StatelessWidget {
           ),
         ),
       ),
-
     ]);
   }
 }

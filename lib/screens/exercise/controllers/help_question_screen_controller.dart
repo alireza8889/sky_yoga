@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:skyyoga/components/api_constant.dart';
+import 'package:skyyoga/controller/auth_controller/auth_controller.dart';
 import 'package:skyyoga/screens/exercise/models/help_question_model.dart';
 import 'package:skyyoga/screens/exercise/models/help_question_option_model.dart';
 import 'package:skyyoga/services/dio_services.dart';
@@ -11,16 +12,20 @@ class HelpQuestionScreenController extends GetxController {
 
   RxList<String> selectedOptionsVideoId = <String>[].obs;
 
+  RxBool helpQuestionScreenIsLoading = false.obs;
+
   RxInt currentIndexForPageView = 1.obs;
   PageController pageController = PageController();
 
-  String token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQyNzI4NTE3LCJpYXQiOjE3NDI3Mjc2NzcsImp0aSI6IjE2NTNlMzkwNDExYjQ0ZTFiYTY5NGQ2NjQzN2YyZmVhIiwidXNlcl9pZCI6MTJ9.vWctDohlWeLTUZmgfWXH7RCm76LQfLj2yRj-XpII3h4";
+  String token = '';
 
   //get new token
-  String getNewToken() {
-return token;
+  Future<void> getNewToken() async {
+    final authController = Get.find<AuthController>();
+    final tokenn = await authController.tokenRefresh();
+    token = tokenn;
   }
+
 // Save RxList<String> to SharedPreferences
   Future<void> saveSelectedOptionsVideoId() async {
     final prefs = await SharedPreferences.getInstance();
@@ -34,11 +39,9 @@ return token;
     // Save JSON string to SharedPreferences
     await prefs.setString('selectedOptionsVideoId', jsonString);
     print('saved to local sharedPreference');
+  }
 
-
-    }
-
-    //get saved video_ids from shared preference
+  //get saved video_ids from shared preference
   Future<List<Map<String, String>>> getSavedVideoIds() async {
     final prefs = await SharedPreferences.getInstance();
 
@@ -55,7 +58,8 @@ return token;
           .toList());
 
       // Format the video IDs into the desired structure
-      final List<Map<String, String>> formattedVideoIds = videoIds.map((videoId) {
+      final List<Map<String, String>> formattedVideoIds =
+          videoIds.map((videoId) {
         return {"video_id": videoId};
       }).toList();
 
@@ -65,18 +69,16 @@ return token;
       print('No video IDs found in SharedPreferences');
       return []; // Return an empty list if no video IDs are found
     }
-
-
-
   }
 
-
   //get help questions
-  Future<void> getAllHelpQuestion({required String token}) async {
+  Future<void> getAllHelpQuestion() async {
+    helpQuestionScreenIsLoading.value = true;
     final String url = ApiUrlConstant.getAllHelpQuestion;
     final dioServices = DioServices();
 
     try {
+      await getNewToken();
       final response = await dioServices.getMethodBearer({}, url, token);
 
       if (response.statusCode == 200) {
@@ -96,34 +98,31 @@ return token;
         helpQuestionList.add(helpQuestionItem);
         //قراره جنتا helpQuestionItem به لیست اضافه بشه با استفاده از حلقه for که در نهایت pageview چند صفحه داشته باشه
 
-        // final String error = responseData['error'];
-        // final String message = responseData['message'];
-        // final Map<String, dynamic> pagination = responseData['pagination'];
-
-        // Print or use the data as needed
         print('Data: $data');
-        // print('Error: $error');
-        // print('Message: $message');
-        // print('Pagination: $pagination');
+
+        helpQuestionScreenIsLoading.value = false;
       } else {
+        helpQuestionScreenIsLoading.value = false;
+
         print('Failed to load data: ${response.statusCode}');
       }
     } catch (e) {
+      helpQuestionScreenIsLoading.value = false;
+
       print('Errror: $e');
     }
   }
 
-
-
   //send help questions videoId
   Future<Response> sendHelpQuestionAnswersVideoId({
     required String videoId,
-
   }) async {
     final String url = ApiUrlConstant.sendHelpQuestionAnswersVideoId;
     final dioServices = DioServices();
 
     try {
+      await getNewToken();
+
       // Create a map with the single video ID
       final Map<String, dynamic> videoIdMap = {
         "video_id": videoId,
@@ -144,10 +143,9 @@ return token;
     }
   }
 
-
 //send all video id
   Future<bool> sendAllVideoIds() async {
-    List<int> res=[];
+    List<int> res = [];
     // Retrieve the list of video IDs
     await saveSelectedOptionsVideoId();
     final List<Map<String, String>> videoIds = await getSavedVideoIds();
@@ -158,7 +156,9 @@ return token;
 
       try {
         // Send the video ID and wait for the response
-        final response = await sendHelpQuestionAnswersVideoId(videoId: videoId, );
+        final response = await sendHelpQuestionAnswersVideoId(
+          videoId: videoId,
+        );
 
         // Check the status code of the response
         if (response.statusCode == 200) {
@@ -166,7 +166,8 @@ return token;
           res.add(1);
         } else {
           res.add(0);
-          print('Error: Failed to send video ID $videoId. Status code: ${response.statusCode}');
+          print(
+              'Error: Failed to send video ID $videoId. Status code: ${response.statusCode}');
         }
       } catch (e) {
         res.add(0);
@@ -174,9 +175,9 @@ return token;
       }
     }
     //if all videoIds send successfully
-    if(res.any((element)=>element==0)){
+    if (res.any((element) => element == 0)) {
       return false;
-    }else{
+    } else {
       return true;
     }
   }
@@ -185,6 +186,6 @@ return token;
   void onInit() {
     super.onInit();
     // TODO: implement onInit
-    getAllHelpQuestion(token: token);
+    getAllHelpQuestion();
   }
 }

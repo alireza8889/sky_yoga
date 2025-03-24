@@ -13,6 +13,11 @@ class ApiUrlConstant {
       '$baseUrl/api/v1/users/reset-password/verify-otp/';
   static const postGoogleLogin = '$baseUrl/api/v1/users/auth/google/';
 
+  //token refresh
+  static const tokenRefresh = '$baseUrl/api/v1/users/token/refresh/';
+
+
+
 
   //exetcise screen
   static const getAllHelpQuestion = '$baseUrl/api/v1/users/recommended-positions/capable/';

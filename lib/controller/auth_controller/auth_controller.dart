@@ -334,4 +334,23 @@ class AuthController extends GetxController {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     isLoggedIn.value = prefs.getBool('isLoggedIn') ?? false;
   }
+//refresh token function
+  Future<String> tokenRefresh()async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final refreshToken = prefs.getString('refresh_token');
+    print(refreshToken);
+    var response = await DioServices()
+        .postMethod({'refresh':refreshToken}, ApiUrlConstant.tokenRefresh);
+    print(response.data);
+    // return '';
+    if(response.statusCode==200){
+      final token=response.data['data']["access"];
+      await prefs.setString(
+          'refresh_token', token);
+      return token;
+    }
+    else{
+      return '';
+    }
+  }
 }

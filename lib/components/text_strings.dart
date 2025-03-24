@@ -7,6 +7,7 @@ class AppTexts {
   static const String pastExerciseDescription='You can see past exercises here';
   static const String toUnlockDescription='To unlock this step you need to help us answer question';
   static const String continueButton='continue';
+  static const String getStartButton='Get Start';
 
   //progress screen
 
