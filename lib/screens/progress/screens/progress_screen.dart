@@ -41,7 +41,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
           child: SingleChildScrollView(
             child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
               //title and description
-              Container(
+              SizedBox(
                 // color: Colors.blue,
                 width: AppDeviceUtils.getScreenWidth(),
                 height: showDescription
@@ -51,7 +51,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
+                    SizedBox(
                       height: AppDeviceUtils.getScreenheight() * 0.05,
                       width: AppDeviceUtils.getScreenWidth(),
                       child: AutoSizeText(
@@ -64,7 +64,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                     ),
                     // Container(color:Colors.orangeAccent,height: AppDeviceUtils.getScreenheight()*0.01,),
                     showDescription
-                        ? Container(
+                        ? SizedBox(
                             // color: Colors.red,
                             height: AppDeviceUtils.getScreenheight() * 0.05,
                             child: AutoSizeText(
@@ -82,7 +82,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
               //space between
         
               //chart
-              Container(
+              SizedBox(
                 height: AppDeviceUtils.getScreenheight() * 0.35,
                 // color: Colors.green,
                 child: SfCircularChart(
@@ -119,7 +119,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
+                  SizedBox(
                     height: AppDeviceUtils.getScreenheight() * 0.05,
                     width: AppDeviceUtils.getScreenWidth() * 0.58,
                     // color: Colors.pink,
@@ -155,7 +155,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                 ],
               ),
               // Container(color:Colors.orangeAccent,height: AppDeviceUtils.getScreenheight()*0.01,),
-              Container(
+              SizedBox(
                 // color: Colors.green,
                 height: AppDeviceUtils.getScreenheight() * 0.04,
                 width: AppDeviceUtils.getScreenWidth(),
@@ -184,7 +184,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                         );
                       }),
                     )
-                  : Container(
+                  : SizedBox(
                       height: AppDeviceUtils.getScreenheight() * 0.2,
                       // color: Colors.blue,
         

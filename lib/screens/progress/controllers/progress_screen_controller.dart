@@ -174,7 +174,7 @@ class ProgressScreenController extends GetxController {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Container(
+                  SizedBox(
                     height: AppDeviceUtils.getScreenheight() * 0.08,
                     width: double.infinity,
                     // color: Colors.blue,
@@ -187,7 +187,7 @@ class ProgressScreenController extends GetxController {
                           fontWeight: FontWeight.bold),
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     height: AppDeviceUtils.getScreenheight() * 0.05,
                     width: double.infinity,
                     // color: Colors.orange,
@@ -200,7 +200,7 @@ class ProgressScreenController extends GetxController {
                           fontWeight: FontWeight.normal),
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     // color: Colors.pink,
                     height: AppDeviceUtils.getScreenheight() * 0.7,
                     child: GridView.builder(

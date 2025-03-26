@@ -39,7 +39,7 @@ class HelpQuestionScreen extends StatelessWidget {
             padding: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
             child: Column(
               children: [
-                Container(
+                SizedBox(
                   // color: Colors.green,
                   height: AppDeviceUtils.getScreenheight() * 0.83,
                   width: AppDeviceUtils.getScreenWidth(),

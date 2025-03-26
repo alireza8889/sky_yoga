@@ -345,8 +345,9 @@ class AuthController extends GetxController {
     // return '';
     if(response.statusCode==200){
       final token=response.data['data']["access"];
-      await prefs.setString(
-          'refresh_token', token);
+
+      await prefs.setString('access_token',token);
+
       return token;
     }
     else{

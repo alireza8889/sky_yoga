@@ -161,6 +161,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.11"
+  delayed_widget:
+    dependency: "direct main"
+    description:
+      name: delayed_widget
+      sha256: "07e17eea3ba8ff508fc9bdc78fa1585c60740651c5ca9558d800672ba20597c6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.2"
   device_frame:
     dependency: transitive
     description:
@@ -778,6 +786,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.12.1"
+  stacked_trio_carousel:
+    dependency: "direct main"
+    description:
+      name: stacked_trio_carousel
+      sha256: "1cc551550eedd23831847e16629125df110e191e2c6181ddf1a356572a0b0ada"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   stream_channel:
     dependency: transitive
     description:
@@ -807,6 +823,14 @@ packages:
     description:
       name: syncfusion_flutter_core
       sha256: f1d2b52697543e13bdefdc62d15868124a265987577f53224a7dbe176c8448f0
+      url: "https://pub.dev"
+    source: hosted
+    version: "28.2.12"
+  syncfusion_flutter_gauges:
+    dependency: "direct main"
+    description:
+      name: syncfusion_flutter_gauges
+      sha256: "246a34dd74b6a41aed22315a1ecc773c883897450d5a0a5e7b9249c4f653b2fe"
       url: "https://pub.dev"
     source: hosted
     version: "28.2.12"

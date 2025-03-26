@@ -6,6 +6,8 @@ import 'package:skyyoga/res/colors.dart';
 import 'package:skyyoga/screens/today/controller/select_mood_controller.dart';
 
 class MoodSelectionScreen extends StatefulWidget {
+  const MoodSelectionScreen({super.key});
+
   @override
   _MoodSelectionScreenState createState() => _MoodSelectionScreenState();
 }

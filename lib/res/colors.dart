@@ -68,6 +68,10 @@ class AppTextColor {
 
   //today
   static const Color setMoodButtonTextColor = Color(0xfffffefe);
+  static const Color todayScreenBottomGridviewText = Color(0xcaffffff);
+  static const Color todayBottomSheetOkButtonColorText = Color(0xcaffffff);
+
+
 
 }
 
@@ -145,10 +149,16 @@ class AppWidgetColor {
 
   //today
   static const Color selectMoodsButtonGradient1 = Color(0x7effffff);
-  static const Color selectMoodsButtonGradient2 = Color(0xffffff);
+  static const Color selectMoodsButtonGradient2 = Color(0x00ffffff);
+  static const Color todayQuestion1Gradient1 = Color(0xca92A7DA);
+  static const Color todayQuestion1Gradient2 = Color(0xff154fd5);
   static List<Color> selectMoodsButtonGradient = [
     AppWidgetColor.selectMoodsButtonGradient1,
     AppWidgetColor.selectMoodsButtonGradient2,
+
+  ];  static List<Color> todayQuestion1Gradient = [
+    AppWidgetColor.todayQuestion1Gradient1,
+    AppWidgetColor.todayQuestion1Gradient2,
 
   ];
   static const Color selectMoodsScreenGradient1 = Color(0xfd2894f8);
@@ -161,6 +171,19 @@ class AppWidgetColor {
   ];
 
   static const Color setMoodButtonBackGround = Color(0xff191d2d);
+
+  static const Color todayScreenGetStartBackGround = Color(0xff191d2d);
+  static const Color todayScreenBottomSheetBackGround = Color(0xa8e1dfdf);
+
+  static const Color todayScreenQuestion3YesOrNoBorder= Color(0xff757474);
+
+
+  static const Color todayScreenBottomSheetTextColor = Color(0xFF000000);
+  static const Color todayQuestion3YesOrNoButtonColor = Color(0xFF000000);
+  static const Color todayBottomSheetOkActiveButtonColor = Color(0xFF000000);
+  static const Color todayBottomSheetOkNotActiveButtonColor = Color(0xca7A7F85);
+  static const Color todayBottomSheetGridItem = Color(0xcaf3f3f3);
+
 
 
 }

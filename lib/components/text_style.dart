@@ -276,5 +276,50 @@ class AppTextStyle {
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.bold,
       color:AppTextColor.setMoodButtonTextColor);
+  static final todayScreenAppBarTitle=GoogleFonts.openSans(
+      fontSize: 20,
+      fontStyle: FontStyle.normal,
+      fontWeight: FontWeight.w100,
+      color:AppTextColor.exerciseScreenTitle);
+
+  static final todayScreenTitle=GoogleFonts.openSans(
+      fontSize: 24,
+      fontStyle: FontStyle.normal,
+      fontWeight: FontWeight.bold,
+      color: AppTextColor.exerciseScreenTitle);
+
+  static final todayScreenDescriptionStyle=GoogleFonts.openSans(
+      fontSize: 16,
+      fontStyle: FontStyle.normal,
+      fontWeight: FontWeight.w400,
+      color: AppTextColor.exerciseScreenTitle);
+
+  static final todayScreenBottomSheetQuestion=GoogleFonts.openSans(
+      fontSize: 20,
+      fontStyle: FontStyle.normal,
+      fontWeight: FontWeight.w500,
+      color: AppTextColor.exerciseScreenTitle);
+  static final todayScreenQuestion2TimeTextStyle=GoogleFonts.openSans(
+      fontSize: 20,
+      fontStyle: FontStyle.normal,
+      fontWeight: FontWeight.bold,
+      color: AppTextColor.exerciseScreenTitle);
+
+  static final todayScreenBottomSheetQuestion4=GoogleFonts.openSans(
+      fontSize: 22,
+      fontStyle: FontStyle.normal,
+      fontWeight: FontWeight.bold,
+      color: AppTextColor.exerciseScreenTitle);
+  static final todayScreenBottomSheetQuestionOkButton=GoogleFonts.openSans(
+      fontSize: 20,
+      fontStyle: FontStyle.normal,
+      fontWeight: FontWeight.bold,
+      color: AppTextColor.todayBottomSheetOkButtonColorText);
+  static final todayScreenBottomGridviewText=GoogleFonts.openSans(
+      fontSize: 13,
+      fontStyle: FontStyle.normal,
+      fontWeight: FontWeight.normal,
+      color: AppTextColor.todayScreenBottomGridviewText);
+
 
 }

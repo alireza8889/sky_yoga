@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:skyyoga/screens/progress/screens/widgets/goal_level_thumbnail_widget.dart';
 import 'package:skyyoga/utils/device_utility.dart';
@@ -14,7 +13,7 @@ class GoalsLevelsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
 
       height: 120,
       width: AppDeviceUtils.getScreenWidth(),
@@ -27,7 +26,7 @@ class GoalsLevelsWidget extends StatelessWidget {
             goalName,
             style: TextStyle(fontSize: 12, color: Colors.black),
           ),
-          Container(
+          SizedBox(
             // color: Colors.purple,
 
           height: 100,

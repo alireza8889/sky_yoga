@@ -1,0 +1,2 @@
+/Users/alireza/Documents/GitHub/sky_yoga/android/app/.cxx/Debug/3a2c5x5w/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/alireza/Documents/GitHub/sky_yoga/android/app/.cxx/Debug/3a2c5x5w/armeabi-v7a/CMakeFiles/rebuild_cache.dir

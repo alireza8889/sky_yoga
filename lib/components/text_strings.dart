@@ -18,4 +18,18 @@ class AppTexts {
 
 //today
   static const String setMoodButton='Set Mood' ;
+  static const String todayScreenTitle = "Find what supports your needs today! ";
+  static const String todayScreenDescription  = "If you are ready to start training, click the button";
+  static const String todayScreenBottomSheetQuestion1  = "Gentele Flow or Push Your Lmits?";
+  static const String todayScreenBottomSheetQuestion2  = "How long you want to flow?";
+  static const String todayScreenBottomSheetQuestion3  = "Feeling any discomfort or pain?";
+  static const String todayScreenBottomSheetQuestion4  = "What kind of discomfort or pain are you experiencing now?";
+  static const String todayGetStartButton  = "Get Start";
+  static const String todayContinueButton  = "Continue";
+  static const String todayQuestion3YesButton  = "Yes";
+  static const String todayQuestion3NoButton  = "No";
+  static const String todayQuestion4OkButton  = "Ok";
+
+
+
 }

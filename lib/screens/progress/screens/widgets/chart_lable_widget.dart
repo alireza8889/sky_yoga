@@ -10,7 +10,7 @@ class ChartLabelWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       // color: Colors.red,
       height: 50,
       width: AppDeviceUtils.getScreenWidth() * 0.3,

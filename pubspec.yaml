@@ -61,6 +61,11 @@ dependencies:
   carousel_slider: ^5.0.0
   device_preview: ^1.2.0
   syncfusion_flutter_charts: ^28.2.12
+  stacked_trio_carousel: ^1.0.1
+  syncfusion_flutter_gauges: ^28.2.12
+  delayed_widget: ^1.1.2
+
+
 
 
 
