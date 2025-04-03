@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +9,8 @@ import 'package:skyyoga/screens/auth/forgot_password/otp_forgot_screen.dart';
 import 'package:skyyoga/screens/auth/forgot_password/reset_password_screen.dart';
 import 'package:skyyoga/screens/auth/login/login_auth.dart';
 import 'package:skyyoga/screens/auth/signup/otp_code_screen.dart';
-import 'package:skyyoga/screens/onboarding_screen/onboarding_screen.dart';
-import 'package:skyyoga/screens/profile_screen/profile_screen.dart';
+import 'package:skyyoga/screens/main_screen/main_screen.dart';
+import 'package:skyyoga/screens/onboarding_screen/choose_name_and_gender_screen.dart';
 import 'package:skyyoga/services/dio_services.dart';
 import 'package:skyyoga/widget/route_page_transaction.dart';
 
@@ -51,7 +52,7 @@ class LoginController extends GetxController {
             // ignore: use_build_context_synchronously
             context,
             MaterialPageRoute(
-              builder: (context) => ProfileScreen(),
+              builder: (context) => MainScreen(),
             ),
             (route) => false,
           );
@@ -82,21 +83,20 @@ class LoginController extends GetxController {
     try {
       var response = await DioServices()
           .postMethodBearer(map, ApiUrlConstant.postlogout, token);
+
       if (response.statusCode == 200) {
         Get.snackbar(
           "Logout",
           response.data["message"],
         );
-
-        prefs.remove('refresh_token');
-        prefs.remove('access_token');
+        prefs.clear();
         await AuthController().saveLoginStatus(false);
-        Navigator.pushReplacement(
+        Navigator.of(context).pushAndRemoveUntil(
           // ignore: use_build_context_synchronously
-          context,
           MaterialPageRoute(
             builder: (context) => AuthLoginScreen(),
           ),
+          (route) => false,
         );
       }
     } catch (e) {
@@ -208,9 +208,7 @@ class SignUpController extends GetxController {
       var response =
           await DioServices().postMethod(map, ApiUrlConstant.postRegister);
 
-      if (response.statusCode == 200) {
-        print('Resend Code');
-      }
+      if (response.statusCode == 200) {}
       // ignore: empty_catches
     } catch (e) {}
   }
@@ -223,6 +221,8 @@ class ForgotPasswordController extends GetxController {
   RxList errorConfirmMessage = [].obs;
 
   forgotpass(String email) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
     Map<String, dynamic> map = {
       'email': email,
     };
@@ -233,6 +233,7 @@ class ForgotPasswordController extends GetxController {
       var response =
           await DioServices().postMethod(map, ApiUrlConstant.postResetPassword);
       if (response.statusCode == 200) {
+        await prefs.setString('email_forgot_password', email);
         Navigator.push(
           Get.context!,
           SlideRightToLeftRoute(
@@ -252,8 +253,9 @@ class ForgotPasswordController extends GetxController {
     }
   }
 
-  otpForgotPassword(String email, String code) async {
+  otpForgotPassword(String code) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    final email = prefs.getString('email_forgot_password');
     Map<String, dynamic> map = {
       "email": email,
       "code": code,
@@ -267,6 +269,7 @@ class ForgotPasswordController extends GetxController {
 
       if (response.statusCode == 200) {
         await prefs.setString('token', response.data["data"]["token"]);
+        prefs.remove('email_forgot_password');
 
         isLoading.value = false;
         Navigator.push(
@@ -288,9 +291,10 @@ class ForgotPasswordController extends GetxController {
     }
   }
 
-  resetPassword(String email, String password, String confirmPassword) async {
+  resetPassword(String password, String confirmPassword) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
+    final email = prefs.getString('email_forgot_password');
     Map<String, dynamic> map = {
       "email": email,
       "token": token,
@@ -334,24 +338,55 @@ class AuthController extends GetxController {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     isLoggedIn.value = prefs.getBool('isLoggedIn') ?? false;
   }
-//refresh token function
-  Future<String> tokenRefresh()async{
+}
+
+class ManageTokenController extends GetxController {
+  RxBool isloading = false.obs;
+  makeNewAccessToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final refreshToken = prefs.getString('refresh_token');
-    print(refreshToken);
-    var response = await DioServices()
-        .postMethod({'refresh':refreshToken}, ApiUrlConstant.tokenRefresh);
-    print(response.data);
-    // return '';
-    if(response.statusCode==200){
-      final token=response.data['data']["access"];
+    final accessToken = prefs.getString('access_token');
 
-      await prefs.setString('access_token',token);
+    Map<String, dynamic> map = {
+      "refresh": refreshToken,
+    };
+    try {
+      isloading.value = true;
+      if (accessToken != null) {
+        var response = await DioServices()
+            .postMethod(map, ApiUrlConstant.postMakeNewAccessToken);
+        if (response.statusCode == 200) {
+          prefs.remove('access_token');
+          await prefs.setString(
+              'access_token', response.data['data']['access']);
+          isloading.value = false;
+        }
+      }
+      isloading.value = false;
+    } catch (e) {
+      isloading.value = false;
+    }
+  }
 
-      return token;
-    }
-    else{
-      return '';
-    }
+  late Timer _timer;
+
+  void startTokenUpdateTimer() {
+    const twelveMinutes = Duration(minutes: 12);
+
+    _timer = Timer.periodic(twelveMinutes, (timer) {
+      makeNewAccessToken();
+    });
+  }
+
+  @override
+  void onInit() {
+    super.onInit();
+    startTokenUpdateTimer();
+  }
+
+  @override
+  void onClose() {
+    _timer.cancel();
+    super.onClose();
   }
 }

@@ -1,43 +1,55 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:skyyoga/screens/exercise/screens/help_question_screen.dart';
+import 'package:skyyoga/res/colors.dart';
+import 'package:skyyoga/screens/exercise/controllers/help_question_screen_controller.dart' show HelpQuestionScreenController;
+
+import '../help_question_screen.dart';
+
+
+
 class SliderWidget extends StatefulWidget {
-  const SliderWidget({super.key});
+  final HelpQuestionScreenController helpQuestionScreenController;
+
+  const SliderWidget({super.key, required this.helpQuestionScreenController});
 
   @override
   State<SliderWidget> createState() => _SliderWidgetState();
 }
 
 class _SliderWidgetState extends State<SliderWidget> {
-  double _dragPosition = 5.0;
- // موقعیت کشیدن
-  bool _isUnlocked = false;
- // وضعیت قفل
-  final double _maxDragWidth =double.infinity;
- // حداکثر عرض قابل کشیدن
+  double dragPosition = 5.0;
+  bool isUnlocked = false;
+  final double _maxDragWidth = double.infinity;
   void _onDragUpdate(DragUpdateDetails details) {
     setState(() {
-      _dragPosition += details.delta.dx; // افزایش موقعیت کشیدن
-      if (_dragPosition < 0) _dragPosition = 5.0; // محدودیت به سمت چپ
-      if (_dragPosition > _maxDragWidth) _dragPosition = _maxDragWidth; // محدودیت به سمت راست
+      dragPosition += details.delta.dx;
+      if (dragPosition < 0) dragPosition = 5.0;
+      if (dragPosition > _maxDragWidth) dragPosition = _maxDragWidth;
     });
   }
 
   void _onDragEnd(DragEndDetails details) {
-    if (_dragPosition >=120) { // اگر 120 pixle کشیده شد
+    if (dragPosition >= 120) {
       setState(() {
-        _isUnlocked = true; // قفل باز شود
-        _dragPosition = 5.0; // بازگشت به حالت اولیه
+        isUnlocked = true;
+        dragPosition = 5.0;
+        widget.helpQuestionScreenController.currentIndexForPageView.value = 0;
+        for(var helpQuestion in widget.helpQuestionScreenController.helpQuestionList ){
+          for(var option in helpQuestion.options){
+            option.isSelected.value=false;
+          }
+        }
+      }
+        );
 
-        Get.to(()=>HelpQuestionScreen());
-        print('Get.to');
-      });
+        Get.to(() => HelpQuestionScreen(
+              helpQuestionScreenController: widget.helpQuestionScreenController,
+            ));
+
     } else {
       setState(() {
-        _dragPosition = 5.0; // بازگشت به حالت اولیه
-        // Get.to(HelpQuestionScreen());
-
+        dragPosition = 5.0;
       });
     }
   }
@@ -48,25 +60,42 @@ class _SliderWidgetState extends State<SliderWidget> {
       width: _maxDragWidth,
       height: 60,
       decoration: BoxDecoration(
-        color: Colors.grey[800],
+        color: AppWidgetColor.sliderBackground,
         borderRadius: BorderRadius.circular(35),
       ),
       child: Stack(
         alignment: Alignment.centerLeft,
         children: [
-          // متن "Slide to unlock"
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.arrow_forward_ios,color: Colors.grey.shade50,),
-              Icon(Icons.arrow_forward_ios ,color:Colors.grey.shade100,),
-              Icon(Icons.arrow_forward_ios, color:Colors.grey.shade200,),
+
+              Icon(
+                size: 12,
+
+                Icons.arrow_forward_ios,
+                color: Colors.white.withOpacity(0.2),
+              ),
+              SizedBox(width: 5,),
+
+              Icon(
+                size: 12,
+                Icons.arrow_forward_ios,
+                color: Colors.white.withOpacity(0.4),
+              ),
+              SizedBox(width: 5,),
+              Icon(
+                size: 12,
+
+                Icons.arrow_forward_ios,
+                color: Colors.white.withOpacity(0.8),
+              ),
+              SizedBox(width: 5,),
+
             ],
           ),
-
-          // دکمه کشیدنی
           Positioned(
-            left: _dragPosition,
+            left: dragPosition,
             child: GestureDetector(
               onHorizontalDragUpdate: _onDragUpdate,
               onHorizontalDragEnd: _onDragEnd,
@@ -74,7 +103,7 @@ class _SliderWidgetState extends State<SliderWidget> {
                 width: 50,
                 height: 50,
                 decoration: BoxDecoration(
-                  color:  Colors.white,
+                  color: Colors.white,
                   shape: BoxShape.circle,
                 ),
                 child: Icon(

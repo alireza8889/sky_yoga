@@ -121,7 +121,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               backgroundColor: WidgetStatePropertyAll(
                                 isButtonEnabled
                                     ? AppWidgetColor.activeBotton
-                                    : AppWidgetColor.unactiveButton,
+                                    : AppWidgetColor.unactiveBotton,
                               ),
                             ),
                             child: controller.isLoading.value

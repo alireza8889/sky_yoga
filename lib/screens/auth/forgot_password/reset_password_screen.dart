@@ -181,7 +181,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                     setState(
                                       () {
                                         controller.resetPassword(
-                                            widget.email,
                                             passwordTextEditingController.text,
                                             confirmPasswordTextEditingController
                                                 .text);
@@ -204,7 +203,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                               backgroundColor: WidgetStatePropertyAll(
                                 isButtonEnabled
                                     ? AppWidgetColor.activeBotton
-                                    : AppWidgetColor.unactiveButton,
+                                    : AppWidgetColor.unactiveBotton,
                               ),
                             ),
                             child: controller.isLoading.value

@@ -39,7 +39,6 @@ class _LoginScreenState extends State<LoginScreen> {
   void dispose() {
     emailTextEditingController.dispose();
     passwordTextEditingController.dispose();
-    controller.dispose();
     super.dispose();
   }
 
@@ -75,7 +74,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     Obx(
                       () => Column(
                         children: [
-                          AppBarAuthentication(size: size, isback: true,),
+                          AppBarAuthentication(
+                            size: size,
+                            isback: true,
+                          ),
                           AuthTextWidget(
                             size: size,
                             title: AppString.titleLogin,
@@ -141,8 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 GestureDetector(
                                   onTap: () {
                                     navigatePushWithFadeTransition(
-                                      context,
-                                        ForgotPasswordScreen());
+                                        context, ForgotPasswordScreen());
                                   },
                                   child: Align(
                                     alignment: Alignment.centerRight,
@@ -194,7 +195,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               backgroundColor: WidgetStatePropertyAll(
                                 isButtonEnabled
                                     ? AppWidgetColor.activeBotton
-                                    : AppWidgetColor.unactiveButton,
+                                    : AppWidgetColor.unactiveBotton,
                               ),
                             ),
                             child: controller.isLoading.value

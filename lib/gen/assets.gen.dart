@@ -60,6 +60,9 @@ class $AssetsImgPngGen {
   AssetGenImage get heavyRain =>
       const AssetGenImage('assets/img/png/Heavy Rain.png');
 
+  /// File path: assets/img/png/Layer.png
+  AssetGenImage get layer => const AssetGenImage('assets/img/png/Layer.png');
+
   /// File path: assets/img/png/arrowleft30min.png
   AssetGenImage get arrowleft30min =>
       const AssetGenImage('assets/img/png/arrowleft30min.png');
@@ -84,23 +87,41 @@ class $AssetsImgPngGen {
   AssetGenImage get videotest2 =>
       const AssetGenImage('assets/img/png/videotest2.png');
 
+  /// File path: assets/img/png/yoga_person.png
+  AssetGenImage get yogaPerson =>
+      const AssetGenImage('assets/img/png/yoga_person.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
     heavyRain,
+    layer,
     arrowleft30min,
     arrowright30min,
     iconPlayerVidoeList,
     imageVideoPlayer,
     videotest1,
     videotest2,
+    yogaPerson,
   ];
 }
 
 class $AssetsImgSvgGen {
   const $AssetsImgSvgGen();
 
+  /// File path: assets/img/svg/Back.svg
+  String get back => 'assets/img/svg/Back.svg';
+
+  /// File path: assets/img/svg/Front.svg
+  String get front => 'assets/img/svg/Front.svg';
+
   /// File path: assets/img/svg/GoogleIcon.svg
   String get googleIcon => 'assets/img/svg/GoogleIcon.svg';
+
+  /// File path: assets/img/svg/No Tranascion.svg
+  String get noTranascion => 'assets/img/svg/No Tranascion.svg';
+
+  /// File path: assets/img/svg/activityActive.svg
+  String get activityActive => 'assets/img/svg/activityActive.svg';
 
   /// File path: assets/img/svg/appleIcon.svg
   String get appleIcon => 'assets/img/svg/appleIcon.svg';
@@ -117,6 +138,9 @@ class $AssetsImgSvgGen {
   /// File path: assets/img/svg/arrow-right-30-min.svg
   String get arrowRight30Min => 'assets/img/svg/arrow-right-30-min.svg';
 
+  /// File path: assets/img/svg/categoryActive.svg
+  String get categoryActive => 'assets/img/svg/categoryActive.svg';
+
   /// File path: assets/img/svg/clock.svg
   String get clock => 'assets/img/svg/clock.svg';
 
@@ -131,6 +155,9 @@ class $AssetsImgSvgGen {
 
   /// File path: assets/img/svg/faceBookIcon.svg
   String get faceBookIcon => 'assets/img/svg/faceBookIcon.svg';
+
+  /// File path: assets/img/svg/failIcon.svg
+  String get failIcon => 'assets/img/svg/failIcon.svg';
 
   /// File path: assets/img/svg/injuriesIcon.svg
   String get injuriesIcon => 'assets/img/svg/injuriesIcon.svg';
@@ -159,8 +186,17 @@ class $AssetsImgSvgGen {
   /// File path: assets/img/svg/profile.svg
   String get profile => 'assets/img/svg/profile.svg';
 
+  /// File path: assets/img/svg/profileActive.svg
+  String get profileActive => 'assets/img/svg/profileActive.svg';
+
   /// File path: assets/img/svg/shape.svg
   String get shape => 'assets/img/svg/shape.svg';
+
+  /// File path: assets/img/svg/successIcon.svg
+  String get successIcon => 'assets/img/svg/successIcon.svg';
+
+  /// File path: assets/img/svg/video-playActive.svg
+  String get videoPlayActive => 'assets/img/svg/video-playActive.svg';
 
   /// File path: assets/img/svg/video_is_not_play.svg
   String get videoIsNotPlay => 'assets/img/svg/video_is_not_play.svg';
@@ -176,17 +212,23 @@ class $AssetsImgSvgGen {
 
   /// List of all assets
   List<String> get values => [
+    back,
+    front,
     googleIcon,
+    noTranascion,
+    activityActive,
     appleIcon,
     arrowDown,
     arrowLeft30Min,
     arrowLeft,
     arrowRight30Min,
+    categoryActive,
     clock,
     edit,
     eyeClose,
     eyeOpen,
     faceBookIcon,
+    failIcon,
     injuriesIcon,
     mail,
     maximize,
@@ -196,7 +238,10 @@ class $AssetsImgSvgGen {
     pauseVideo,
     playVideo,
     profile,
+    profileActive,
     shape,
+    successIcon,
+    videoPlayActive,
     videoIsNotPlay,
     videoIsPlay,
     volumeHigh,

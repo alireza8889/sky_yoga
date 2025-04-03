@@ -14,7 +14,6 @@ class GoalsLevelsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-
       height: 120,
       width: AppDeviceUtils.getScreenWidth(),
       // color: Colors.purple,
@@ -29,21 +28,43 @@ class GoalsLevelsWidget extends StatelessWidget {
           SizedBox(
             // color: Colors.purple,
 
-          height: 100,
+            height: 100,
             width: AppDeviceUtils.getScreenWidth(),
-            child: ListView.builder(
-              physics: goalLevelsThumbnail.length<=4?NeverScrollableScrollPhysics():null,
+            child:ListView.builder(
+              physics: goalLevelsThumbnail.length <= 4
+                  ? NeverScrollableScrollPhysics()
+                  : null,
               scrollDirection: Axis.horizontal,
               itemCount: goalLevelsThumbnail.length,
               itemBuilder: (context, index) {
+                int findFirstInProcessIndex(List<GoalLevelThumbNailModel> thumbnails) {
+                  return thumbnails.indexWhere((item) => !item.isDone);
+                }
                 final thumbnailItem = goalLevelsThumbnail[index];
+
+                // پیدا کردن ایندکس اولین inProcess
+                int firstInProcessIndex = findFirstInProcessIndex(goalLevelsThumbnail);
+
+                // تعیین وضعیت آیتم‌ها
+                String itemStatus;
+                if (thumbnailItem.isDone) {
+                  itemStatus = GoalLevelStatus.passed.toString();
+                } else if (index == firstInProcessIndex) {
+                  itemStatus = GoalLevelStatus.inProcess.toString(); // فقط یک آیتم inProcess باشد
+                } else {
+                  itemStatus = GoalLevelStatus.locked.toString(); // بقیه آیتم‌ها lock شوند
+                }
+
                 return Row(
                   children: [
                     GoalLevelThumbnailWidget(
-                        imageUrl: thumbnailItem.imageUrl,
-                        levelStatus: thumbnailItem.levelStatus,
-                        levelNumber: thumbnailItem.levelNumber),
-                    SizedBox(width:AppDeviceUtils.getScreenWidth()*0.05 ,)
+                      imageUrl: thumbnailItem.thumbnail,
+                      levelStatus: itemStatus,
+                      levelNumber: thumbnailItem.id,
+                    ),
+                    SizedBox(
+                      width: AppDeviceUtils.getScreenWidth() * 0.05,
+                    ),
                   ],
                 );
               },

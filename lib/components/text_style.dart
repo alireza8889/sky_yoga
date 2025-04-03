@@ -13,6 +13,29 @@ class AppTextStyle {
     color: AppTextColor.titleAuthColor,
   );
 
+  // Subscription Payment Screen
+  static final titlePaymentMessage = GoogleFonts.montserrat(
+    fontSize: 18,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w400,
+    color: AppTextColor.titlePaymentColor,
+  );
+
+  // Goals Screen
+  static final titleGoalTextStyle = GoogleFonts.montserrat(
+      fontSize: 20,
+      fontStyle: FontStyle.normal,
+      fontWeight: FontWeight.w600,
+      color: AppTextColor.titleGoalColorText);
+
+  // Main AppBar
+  static final mainAppBar = GoogleFonts.montserrat(
+    fontSize: 20,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w600,
+    color: AppTextColor.mainAppBarColor,
+  );
+
   // Loader Text Video
   static final titleLoadingVideo = GoogleFonts.openSans(
     fontSize: 24,
@@ -188,6 +211,24 @@ class AppTextStyle {
     fontWeight: FontWeight.w400,
     color: AppTextColor.onboardingWelcomeTextColor,
   );
+  static final frontOrBackSelectedTextStyle = GoogleFonts.montserrat(
+    fontSize: 16,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w700,
+    color: AppTextColor.frontOrBackSelectedTextColor,
+  );
+  static final backOrBackSelectedTextStyle = GoogleFonts.montserrat(
+    fontSize: 16,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w400,
+    color: AppTextColor.backOrBackSelectedTextColor,
+  );
+  static final selectedIndexInInjurisbodyTextStyle = GoogleFonts.montserrat(
+    fontSize: 16,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w700,
+    color: AppTextColor.selectedIndexInInjurisbodyTextColor,
+  );
 
   // Profile Screen
   static final titleProfileBottonVerticlaTextStyle = GoogleFonts.openSans(
@@ -205,121 +246,312 @@ class AppTextStyle {
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.w400,
       color: AppTextColor.subTitleProfileColor);
-  static final logtoutTextStyle = GoogleFonts.openSans(
+  static final moreBottomTextStyle = GoogleFonts.openSans(
       fontSize: 14,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.w400,
       color: AppTextColor.logoutProfileColor);
 
+  // Location screen
+  static final chooseLocationTextStyle = GoogleFonts.openSans(
+      fontSize: 16,
+      fontStyle: FontStyle.normal,
+      fontWeight: FontWeight.w400,
+      color: AppTextColor.locationColor);
+
+  // Account Info
+  static final labelTextStyle = GoogleFonts.openSans(
+      fontSize: 16,
+      fontStyle: FontStyle.normal,
+      fontWeight: FontWeight.w400,
+      color: AppTextColor.labelAccountInfoColor);
+  static final textFieldTextStyle = GoogleFonts.openSans(
+      fontSize: 16,
+      fontStyle: FontStyle.normal,
+      fontWeight: FontWeight.w600,
+      color: AppTextColor.textFieldAccountInfoColor);
+
+  // Privacy policy Screen
+  static final textPrivacyPolicyTextStyle = GoogleFonts.openSans(
+      fontSize: 20,
+      fontStyle: FontStyle.normal,
+      fontWeight: FontWeight.w400,
+      color: AppTextColor.textPrivacyPolicyColor);
+
+  // Feed Back
+  static final titleBottomSheetTextStyle = GoogleFonts.openSans(
+    fontSize: 16,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w600,
+    color: AppTextColor.titleBottomSheetColor,
+  );
+  static final textBottomSheetTextStyle = GoogleFonts.openSans(
+    fontSize: 16,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w400,
+    color: AppTextColor.titleBottomSheetColor,
+  );
+  static final labelTextBottomSheetTextStyle = GoogleFonts.openSans(
+    fontSize: 16,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w400,
+    color: AppTextColor.lableTextBottomSheetColor,
+  );
+
+  // Reminder Screen
+  static final textTimeBottomSheetTextStyle = GoogleFonts.openSans(
+    fontSize: 17,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w600,
+    color: AppTextColor.textTimeBottomSheetColor,
+  );
+  static final daysOfTheWeekBottomSheetTextStyle = GoogleFonts.openSans(
+    fontSize: 16,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w400,
+    color: AppTextColor.daysOfTheWeekTextBottomSheetColor,
+  );
+  static final timeSetReminderBottomSheetTextStyle = GoogleFonts.openSans(
+    fontSize: 20,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w600,
+    color: AppTextColor.titleTimeRminderBottomSheetColor,
+  );
+  static final subTitleTxetReminderBottomSheetTextStyle = GoogleFonts.openSans(
+    fontSize: 16,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w600,
+    color: AppTextColor.titleTimeRminderBottomSheetColor,
+  );
+  static final daysOfWeekReminderBottomSheetTextStyle = GoogleFonts.openSans(
+    fontSize: 12,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w600,
+    color: AppTextColor.daysOfTheWeekTextBottomSheetColor,
+  );
+  static final deleteWarningReminderBottomSheetTextStyle = GoogleFonts.openSans(
+    fontSize: 12,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w400,
+    color: AppTextColor.deleteBottonTextBottomSheetColor,
+  );
+
+  // Subscription Screen
+  static final titleSubscriptionBottonTextStyle = GoogleFonts.openSans(
+    fontSize: 16,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w600,
+  );
+  static final titlePlanToContinueTextStyle = GoogleFonts.openSans(
+    fontSize: 17,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w600,
+    color: AppTextColor.titlePlanToContinueColor,
+  );
+  static final priceTextStyle = GoogleFonts.openSans(
+    fontSize: 12,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w400,
+    color: AppTextColor.priceColor,
+  );
+  static final offPriceTextStyle = GoogleFonts.openSans(
+    fontSize: 10,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w600,
+    color: AppTextColor.offPriceColor,
+  );
+  static final servicesTextStyle = GoogleFonts.openSans(
+    fontSize: 14,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w400,
+    color: AppTextColor.servicesColor,
+  );
+  static final hintTextFieldTextStyle = GoogleFonts.openSans(
+    fontSize: 16,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w400,
+    color: AppTextColor.hintTextFieldColor,
+  );
+  static final saveCardTextStyle = GoogleFonts.openSans(
+    fontSize: 16,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w400,
+    color: AppTextColor.saveCardFieldColor,
+  );
+  static final showSubscriptionDateTextStyle = GoogleFonts.openSans(
+    fontSize: 16,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w600,
+    color: AppTextColor.saveCardFieldColor,
+  );
+  static final walletDataTextStyle = GoogleFonts.openSans(
+    fontSize: 12,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w400,
+    color: AppTextColor.walletDataColor,
+  );
+  static final transactionDateTextStyle = GoogleFonts.openSans(
+    fontSize: 15,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w400,
+    color: AppTextColor.transactionDateColor,
+  );
+  static final titleTransactionsTextStyle = GoogleFonts.openSans(
+    fontSize: 18,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w400,
+    color: AppTextColor.titletransactionColor,
+  );
+  static final titleAllTransactionsTextStyle = GoogleFonts.openSans(
+    fontSize: 16,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w400,
+    color: AppTextColor.titleAllTransactionColor,
+  );
+
 //exercise screen
-  static final exerciseScreenTitle=GoogleFonts.openSans(
+  static final suggestedExerciseScreenDescriptionStyle = GoogleFonts.openSans(
+      fontSize: 14,
+      fontStyle: FontStyle.normal,
+      fontWeight: FontWeight.w400,
+      color: AppTextColor.exerciseScreenTitle);
+
+  static final pastExerciseWidgetDescriptionStyle = GoogleFonts.openSans(
+      fontSize: 16,
+      fontStyle: FontStyle.normal,
+      fontWeight: FontWeight.bold,
+      color: AppTextColor.exerciseScreenDescription);
+  static final pastExerciseWidgetTitleStyle = GoogleFonts.openSans(
+      fontSize: 18,
+      fontStyle: FontStyle.normal,
+      fontWeight: FontWeight.w400,
+      color: AppTextColor.exerciseScreenTitle);
+
+  static final exerciseScreenTitle = GoogleFonts.openSans(
       fontSize: 24,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.bold,
       color: AppTextColor.exerciseScreenTitle);
 
-  static final exerciseScreenDescriptionStyle=GoogleFonts.openSans(
-      fontSize: 16,
-      fontStyle: FontStyle.normal,
-      fontWeight: FontWeight.w400,
-      color: AppTextColor.exerciseScreenTitle);
-
-  static final pastExerciseScreenDescriptionStyle=GoogleFonts.openSans(
-      fontSize: 16,
-      fontStyle: FontStyle.normal,
-      fontWeight: FontWeight.normal,
-      color: AppTextColor.exerciseScreenDescription);
-
-  static final suggestedExerciseItemTilteStyle=GoogleFonts.openSans(
-      fontSize: 18,
-      fontStyle: FontStyle.normal,
-      fontWeight: FontWeight.bold,
-      color: AppTextColor.suggestedExerciseTitle);
-
-  static final toUnlockDescriptionStyle=GoogleFonts.openSans(
+  static final toUnlockDescripthyionStyle = GoogleFonts.openSans(
       fontSize: 18,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.bold,
       color: AppTextColor.toUnlockDescription);
 
-  static final helperQuestion=GoogleFonts.openSans(
+  static final exerciseScreenDescriptionStyle = GoogleFonts.openSans(
+      fontSize: 16,
+      fontStyle: FontStyle.normal,
+      fontWeight: FontWeight.w400,
+      color: AppTextColor.exerciseScreenTitle);
+
+  static final getStartButton = GoogleFonts.openSans(
+      fontSize: 14,
+      fontStyle: FontStyle.normal,
+      fontWeight: FontWeight.normal,
+      color: AppTextColor.helpScreenQuestion);
+
+  static final pastExerciseScreenDescriptionStyle = GoogleFonts.openSans(
+      fontSize: 16,
+      fontStyle: FontStyle.normal,
+      fontWeight: FontWeight.normal,
+      color: AppTextColor.exerciseScreenDescription);
+
+  static final suggestedExerciseItemTilteStyle = GoogleFonts.openSans(
+      fontSize: 18,
+      fontStyle: FontStyle.normal,
+      fontWeight: FontWeight.bold,
+      color: AppTextColor.suggestedExerciseTitle);
+
+  static final toUnlockDescriptionStyle = GoogleFonts.openSans(
+      fontSize: 18,
+      fontStyle: FontStyle.normal,
+      fontWeight: FontWeight.bold,
+      color: AppTextColor.toUnlockDescription);
+
+  static final helperQuestion = GoogleFonts.openSans(
       fontSize: 25,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.bold,
       color: AppTextColor.helpScreenQuestion);
 
-
   //progress screen
-  static final progressScreenGoalsTitle=GoogleFonts.openSans(
+  static final selectGoalsItemTilteStyle = GoogleFonts.openSans(
+      fontSize: 14,
+      fontStyle: FontStyle.normal,
+      fontWeight: FontWeight.normal,
+      color: AppTextColor.chartLabelColor);
+  static final SetGoalsButtonTextStyle = GoogleFonts.openSans(
+      fontSize: 14,
+      fontStyle: FontStyle.normal,
+      fontWeight: FontWeight.bold,
+      color: AppTextColor.setGoalButtonTextColor);
+  static final progressScreenGoalsTitle = GoogleFonts.openSans(
       fontSize: 18,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.bold,
       color: AppTextColor.exerciseScreenTitle);
 
-  static final progressScreenDescriptionStyle=GoogleFonts.openSans(
+  static final progressScreenDescriptionStyle = GoogleFonts.openSans(
       fontSize: 16,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.w400,
       color: AppTextColor.exerciseScreenDescription);
 
-
-  static final chartLabelStyle=GoogleFonts.openSans(
+  static final chartLabelStyle = GoogleFonts.openSans(
       fontSize: 14,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.normal,
-      color:AppTextColor.chartLabelColor);
-
+      color: AppTextColor.chartLabelColor);
 
   //today
-  static final setMoodButtonTextStyle=GoogleFonts.openSans(
+  static final setMoodButtonTextStyle = GoogleFonts.openSans(
       fontSize: 14,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.bold,
-      color:AppTextColor.setMoodButtonTextColor);
-  static final todayScreenAppBarTitle=GoogleFonts.openSans(
+      color: AppTextColor.setMoodButtonTextColor);
+  static final todayScreenAppBarTitle = GoogleFonts.openSans(
       fontSize: 20,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.w100,
-      color:AppTextColor.exerciseScreenTitle);
+      color: AppTextColor.exerciseScreenTitle);
 
-  static final todayScreenTitle=GoogleFonts.openSans(
+  static final todayScreenTitle = GoogleFonts.openSans(
       fontSize: 24,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.bold,
       color: AppTextColor.exerciseScreenTitle);
 
-  static final todayScreenDescriptionStyle=GoogleFonts.openSans(
+  static final todayScreenDescriptionStyle = GoogleFonts.openSans(
       fontSize: 16,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.w400,
       color: AppTextColor.exerciseScreenTitle);
 
-  static final todayScreenBottomSheetQuestion=GoogleFonts.openSans(
+  static final todayScreenBottomSheetQuestion = GoogleFonts.openSans(
       fontSize: 20,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.w500,
       color: AppTextColor.exerciseScreenTitle);
-  static final todayScreenQuestion2TimeTextStyle=GoogleFonts.openSans(
+  static final todayScreenQuestion2TimeTextStyle = GoogleFonts.openSans(
       fontSize: 20,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.bold,
       color: AppTextColor.exerciseScreenTitle);
 
-  static final todayScreenBottomSheetQuestion4=GoogleFonts.openSans(
+  static final todayScreenBottomSheetQuestion4 = GoogleFonts.openSans(
       fontSize: 22,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.bold,
       color: AppTextColor.exerciseScreenTitle);
-  static final todayScreenBottomSheetQuestionOkButton=GoogleFonts.openSans(
+  static final todayScreenBottomSheetQuestionOkButton = GoogleFonts.openSans(
       fontSize: 20,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.bold,
       color: AppTextColor.todayBottomSheetOkButtonColorText);
-  static final todayScreenBottomGridviewText=GoogleFonts.openSans(
+  static final todayScreenBottomGridviewText = GoogleFonts.openSans(
       fontSize: 13,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.normal,
       color: AppTextColor.todayScreenBottomGridviewText);
-
-
 }

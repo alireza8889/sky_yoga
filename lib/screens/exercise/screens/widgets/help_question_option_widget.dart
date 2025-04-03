@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skyyoga/utils/device_utility.dart';
 
+// ignore: must_be_immutable
 class HelpQuestionOptionWidget extends StatelessWidget {
   final String thumbnail;
   final String videoId;
@@ -41,6 +42,7 @@ class HelpQuestionOptionWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 border: Border.all(width: 3, color: Colors.blue),
                 borderRadius: BorderRadius.circular(15),
+                // ignore: deprecated_member_use
                 color: Colors.blue.withOpacity(0.2),
               ),
             );

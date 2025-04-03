@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -7,23 +9,28 @@ import 'package:skyyoga/screens/exercise/models/help_question_model.dart';
 import 'package:skyyoga/screens/exercise/models/help_question_option_model.dart';
 import 'package:skyyoga/services/dio_services.dart';
 
+
+
 class HelpQuestionScreenController extends GetxController {
   RxList<HelpQuestionModel> helpQuestionList = <HelpQuestionModel>[].obs;
-
+  RxBool sendingAnswersLoading = false.obs;
   RxList<String> selectedOptionsVideoId = <String>[].obs;
 
   RxBool helpQuestionScreenIsLoading = false.obs;
+  RxBool sendHelpQuestionAnswersLoading = false.obs;
 
-  RxInt currentIndexForPageView = 1.obs;
+  RxInt currentIndexForPageView = 0.obs;
   PageController pageController = PageController();
 
   String token = '';
 
+  bool isAllHelpQuestionAnswered = false;
+
   //get new token
   Future<void> getNewToken() async {
-    final authController = Get.find<AuthController>();
-    final tokenn = await authController.tokenRefresh();
-    token = tokenn;
+    final prefs = await SharedPreferences.getInstance();
+    final tokenn = prefs.getString('access_token');
+    token = tokenn!;
   }
 
 // Save RxList<String> to SharedPreferences
@@ -73,6 +80,13 @@ class HelpQuestionScreenController extends GetxController {
 
   //get help questions
   Future<void> getAllHelpQuestion() async {
+    // Check Internet Connectivity
+    // final isConnected = await NetworkManager.instance.isConnected();
+    // if (!isConnected) {
+    //   AppHelperFunctions.showSnackBar('No Internet Connection');
+    //   return ;
+    // }
+    print('help Question called');
     helpQuestionScreenIsLoading.value = true;
     final String url = ApiUrlConstant.getAllHelpQuestion;
     final dioServices = DioServices();
@@ -80,112 +94,79 @@ class HelpQuestionScreenController extends GetxController {
     try {
       await getNewToken();
       final response = await dioServices.getMethodBearer({}, url, token);
+      print(response.data);
 
       if (response.statusCode == 200) {
-        // print(response.data);
-        // Parse the JSON response
         final responseData = response.data;
-
-        // // Access the data
         final List<dynamic> data = responseData['data'];
-        final List<HelpQuestionOptionModel> helpQuestionOptions =
-            (responseData['data'] as List)
-                .map((helpQuestionData) =>
-                    HelpQuestionOptionModel.fromJson(helpQuestionData))
-                .toList();
-        final helpQuestionItem =
-            HelpQuestionModel(options: helpQuestionOptions);
-        helpQuestionList.add(helpQuestionItem);
-        //قراره جنتا helpQuestionItem به لیست اضافه بشه با استفاده از حلقه for که در نهایت pageview چند صفحه داشته باشه
 
-        print('Data: $data');
+        // تبدیل داده‌ها به لیست HelpQuestionOptionModel
+        final List<HelpQuestionOptionModel> allOptions = data
+            .map((helpQuestionData) =>
+                HelpQuestionOptionModel.fromJson(helpQuestionData))
+            .toList();
+        for (int i = 0; i < allOptions.length; i += 4) {
+          // اطمینان از اینکه index خارج از محدوده نباشد
+          final end = (i + 4 < allOptions.length) ? i + 4 : allOptions.length;
+          final group = allOptions.sublist(i, end);
 
+          // ایجاد HelpQuestionModel و اضافه کردن به لیست
+          helpQuestionList.add(HelpQuestionModel(options: group));
+        }
+        print(helpQuestionList.map(
+            (element) => (element.options.map((ele) => print(ele.videoId)))));
+
+        print('get help question Data: $data');
         helpQuestionScreenIsLoading.value = false;
       } else {
         helpQuestionScreenIsLoading.value = false;
-
         print('Failed to load data: ${response.statusCode}');
       }
     } catch (e) {
       helpQuestionScreenIsLoading.value = false;
-
-      print('Errror: $e');
+      print('Error: $e');
     }
   }
 
   //send help questions videoId
-  Future<Response> sendHelpQuestionAnswersVideoId({
-    required String videoId,
-  }) async {
-    final String url = ApiUrlConstant.sendHelpQuestionAnswersVideoId;
+  Future<bool> sendAllHelpQuestionAnswersVideoId() async {
+    final String url = ApiUrlConstant.sendAllHelpQuestionAnswersVideoIds;
     final dioServices = DioServices();
-
+    sendHelpQuestionAnswersLoading.value=true;
     try {
       await getNewToken();
 
+      await saveSelectedOptionsVideoId();
+      final List<Map<String, dynamic>> videoIds = await getSavedVideoIds();
       // Create a map with the single video ID
-      final Map<String, dynamic> videoIdMap = {
-        "video_id": videoId,
-      };
 
       // Send the video ID in the request body
-      final response = await dioServices.postMethodBearer(
-        videoIdMap, // Request body with a single video ID
+      final response = await dioServices.postMethodBearerForBulkCreate(
+        videoIds, // Request body with a single video ID
         url,
         token,
       );
+      print('response for send help questions answer:${response.data}');
+      if(response.statusCode==201)
 
       // Return the response object
-      return response;
+        print('statusCode for send help questions answer');
+      print('All video ids for help question sent successfully');
+
+      return true;
     } catch (e) {
-      print('Error: Exception occurred while sending video ID $videoId: $e');
+      print('Error: Exception occurred while sending video ID : $e');
       rethrow; // Rethrow the exception to handle it in the calling method
     }
   }
 
-//send all video id
-  Future<bool> sendAllVideoIds() async {
-    List<int> res = [];
-    // Retrieve the list of video IDs
-    await saveSelectedOptionsVideoId();
-    final List<Map<String, String>> videoIds = await getSavedVideoIds();
 
-    // Iterate over the list and send each video ID
-    for (final videoIdMap in videoIds) {
-      final String videoId = videoIdMap['video_id']!;
-
-      try {
-        // Send the video ID and wait for the response
-        final response = await sendHelpQuestionAnswersVideoId(
-          videoId: videoId,
-        );
-
-        // Check the status code of the response
-        if (response.statusCode == 200) {
-          print('Success: Video ID $videoId was sent successfully.');
-          res.add(1);
-        } else {
-          res.add(0);
-          print(
-              'Error: Failed to send video ID $videoId. Status code: ${response.statusCode}');
-        }
-      } catch (e) {
-        res.add(0);
-        print('Error: Exception occurred while sending video ID $videoId: $e');
-      }
-    }
-    //if all videoIds send successfully
-    if (res.any((element) => element == 0)) {
-      return false;
-    } else {
-      return true;
-    }
-  }
 
   @override
   void onInit() {
     super.onInit();
     // TODO: implement onInit
+
     getAllHelpQuestion();
   }
 }

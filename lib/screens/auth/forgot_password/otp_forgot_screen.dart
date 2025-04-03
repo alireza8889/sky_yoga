@@ -185,7 +185,7 @@ class _OtpForgotScreenState extends State<OtpForgotScreen> {
                                 ? () {
                                     setState(() {
                                       controller.otpForgotPassword(
-                                          widget.email, otpController.text);
+                                          otpController.text);
                                     });
                                   }
                                 : null,
@@ -204,7 +204,7 @@ class _OtpForgotScreenState extends State<OtpForgotScreen> {
                               backgroundColor: WidgetStatePropertyAll(
                                 isButtonEnabled
                                     ? AppWidgetColor.activeBotton
-                                    : AppWidgetColor.unactiveButton,
+                                    : AppWidgetColor.unactiveBotton,
                               ),
                             ),
                             child: controller.isLoading.value

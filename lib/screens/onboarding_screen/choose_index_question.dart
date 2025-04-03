@@ -1,27 +1,47 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:skyyoga/components/text_style.dart';
+import 'package:skyyoga/controller/profile_controller/profile_controller.dart';
 import 'package:skyyoga/res/colors.dart';
 import 'package:skyyoga/res/string.dart';
 import 'package:skyyoga/screens/auth/login/widget/widget.dart';
+import 'package:skyyoga/screens/main_screen/main_screen.dart';
+import 'package:skyyoga/screens/onboarding_screen/choose_front_or_back.dart';
 import 'package:skyyoga/screens/onboarding_screen/widget/selected_box_question.dart';
-import 'package:skyyoga/screens/profile_screen/profile_screen.dart';
 
 class ChooseIndexQuestion extends StatefulWidget {
-  const ChooseIndexQuestion({super.key, required this.username});
+  const ChooseIndexQuestion(
+      {super.key, required this.username, required this.gender});
   final String username;
+  final String gender;
 
   @override
   State<ChooseIndexQuestion> createState() => _ChooseIndexQuestionState();
 }
 
 class _ChooseIndexQuestionState extends State<ChooseIndexQuestion> {
-  List<String> filings = [
-    'Enjoy yoga and avoid injury',
-    'Build strenght and support my posture',
-    'Challenge myself and master new poses',
-    'Find calm and relaxation'
-  ];
+  final controller = Get.put(ProfileController());
+
+  final Map<String, String> filings = {
+    "ENJOY_YOGA": "Enjoy yoga and avoid injury",
+    "BUILD_STRENGTH": "Build strength and support my posture",
+    "CHALLENGE_MYSELF": "Challenge myself and master new poses",
+    "FIND_CALM": "Find calm and relaxation",
+  };
+
+  List<String> selectedValues = [];
+
+  void toggleSelection(String value) {
+    setState(() {
+      if (selectedValues.contains(value)) {
+        selectedValues.remove(value);
+      } else {
+        selectedValues.add(value);
+      }
+    });
+  }
+
   List<String> selectedItem = [];
   List<String> yesNoQuestion = [
     'Yes, I could some extra care',
@@ -30,7 +50,7 @@ class _ChooseIndexQuestionState extends State<ChooseIndexQuestion> {
   bool isButtonEnabled = false;
   int? selectedIndex;
 
-  void checkButtonStatus() {
+  void checkButtonStatus() async {
     setState(() {
       isButtonEnabled = selectedItem.isNotEmpty && selectedIndex != null;
     });
@@ -95,19 +115,16 @@ class _ChooseIndexQuestionState extends State<ChooseIndexQuestion> {
                                                 maxLines: 2,
                                               ),
                                             ),
-                                            for (var i = 0;
-                                                i < filings.length;
-                                                i++)
+                                            for (var i in filings.keys)
                                               GestureDetector(
                                                 onTap: () {
                                                   setState(() {
                                                     if (selectedItem
-                                                        .contains(filings[i])) {
-                                                      selectedItem
-                                                          .remove(filings[i]);
+                                                        .contains(i)) {
+                                                      selectedItem.remove(i);
                                                     } else {
                                                       selectedItem
-                                                          .add(filings[i]);
+                                                          .add(i.toString());
                                                     }
                                                     checkButtonStatus();
                                                   });
@@ -152,7 +169,7 @@ class _ChooseIndexQuestionState extends State<ChooseIndexQuestion> {
                                               size: size,
                                               text: yesNoQuestion[i],
                                               selectedItem: selectedItem,
-                                              filings: filings,
+                                              filings: yesNoQuestion,
                                               index: 0,
                                               isActive: selectedIndex == i
                                                   ? true
@@ -175,46 +192,55 @@ class _ChooseIndexQuestionState extends State<ChooseIndexQuestion> {
               right: size.width * 0.04,
               left: size.width * 0.04,
               bottom: size.height * 0.03,
-              child: ElevatedButton(
-                onPressed: isButtonEnabled
-                    ? () {
-                        setState(
-                          () {
-                            Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ProfileScreen(),
-                              ),
-                              (route) => false,
-                            );
-                          },
-                        );
-                      }
-                    : null,
-                style: ButtonStyle(
-                  minimumSize: WidgetStatePropertyAll(
-                    Size(
-                      size.width * 0.9,
-                      size.height * 0.06,
+              child: Obx(
+                () => ElevatedButton(
+                  onPressed: isButtonEnabled
+                      ? () {
+                          setState(
+                            () {
+                              controller.updateProfile(
+                                index: selectedIndex!,
+                                context: context,
+                                gender: widget.gender,
+                                name: widget.username,
+                                mainFocuses: selectedItem,
+                                page: selectedIndex == 1
+                                    ? MainScreen()
+                                    : ChooseFrontOrBack(),
+                              );
+                            },
+                          );
+                        }
+                      : null,
+                  style: ButtonStyle(
+                    minimumSize: WidgetStatePropertyAll(
+                      Size(
+                        size.width * 0.9,
+                        size.height * 0.06,
+                      ),
+                    ),
+                    shape: WidgetStatePropertyAll(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                    ),
+                    backgroundColor: WidgetStatePropertyAll(
+                      isButtonEnabled
+                          ? AppWidgetColor.activeBotton
+                          : AppWidgetColor.unactiveBotton,
                     ),
                   ),
-                  shape: WidgetStatePropertyAll(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                  ),
-                  backgroundColor: WidgetStatePropertyAll(
-                    isButtonEnabled
-                        ? AppWidgetColor.activeBotton
-                        : AppWidgetColor.unactiveButton,
-                  ),
-                ),
-                child: AutoSizeText(
-                  AppString.bottonOnboarding,
-                  style: AppTextStyle.bottonSubmitTextStyle,
-                  minFontSize: 8,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+                  child: controller.isLoading.value
+                      ? CircularProgressIndicator(
+                          color: Colors.white,
+                        )
+                      : AutoSizeText(
+                          AppString.bottonOnboarding,
+                          style: AppTextStyle.bottonSubmitTextStyle,
+                          minFontSize: 8,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                 ),
               ),
             ),

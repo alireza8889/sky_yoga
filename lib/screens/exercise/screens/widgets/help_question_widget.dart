@@ -1,13 +1,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
-import 'package:skyyoga/components/text_strings.dart';
 import 'package:skyyoga/components/text_style.dart';
 import 'package:skyyoga/res/colors.dart';
-import 'package:skyyoga/screens/exercise/controllers/help_question_screen_controller.dart';
+import 'package:skyyoga/res/string.dart';
 import 'package:skyyoga/screens/exercise/screens/widgets/help_question_option_widget.dart';
 import 'package:skyyoga/utils/device_utility.dart';
-
+import 'package:get/get.dart';
+import '../../controllers/exercise_controllers.dart';
+import '../../controllers/help_question_screen_controller.dart';
 import '../../models/help_question_option_model.dart';
 
 class HelpQuestionWidget extends StatelessWidget {
@@ -31,10 +31,7 @@ class HelpQuestionWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 14.0),
             child: SizedBox(
-              // color: Colors.orange,
-              height: AppDeviceUtils.getScreenheight() * 0.07,
-              // padding: EdgeInsets.symmetric(horizontal: 8.0),
-              // color: Colors.green,
+              height: AppDeviceUtils.getScreenheight() * 0.06,
               child: AutoSizeText(
                 minFontSize: 12,
                 maxLines: 2,
@@ -44,13 +41,11 @@ class HelpQuestionWidget extends StatelessWidget {
             ),
           ),
           Container(
-            // color: Colors.blue,
-            height: AppDeviceUtils.getScreenheight() * 0.02,
+            height: AppDeviceUtils.getScreenheight() * 0.01,
           ),
           SizedBox(
-            // color: Colors.yellow,
             width: AppDeviceUtils.getScreenWidth() * 0.8,
-            height: AppDeviceUtils.getScreenheight() * 0.64,
+            height: AppDeviceUtils.getScreenheight() * 0.68,
             child: ListView.builder(
                 itemCount: options.length,
                 itemBuilder: (context, index) {
@@ -60,9 +55,7 @@ class HelpQuestionWidget extends StatelessWidget {
                           option.isSelected.value = false;
                         }
                         options[index].isSelected.value =
-                            !options[index].isSelected.value;
-                        // controller.selectedOptionsVideoId
-                        //     .add(options[index].videoId);
+                        !options[index].isSelected.value;
                       },
                       child: HelpQuestionOptionWidget(
                         thumbnail: options[index].thumbnail,
@@ -72,43 +65,46 @@ class HelpQuestionWidget extends StatelessWidget {
                       ));
                 }),
           ),
-
-          //continue button
           Obx(() {
             final activeButton =
-                options.any((element) => element.isSelected.value == true);
+            options.any((element) => element.isSelected.value == true);
             return GestureDetector(
               onTap: () async {
                 if (activeButton) {
                   for (var option in options) {
                     if (option.isSelected.value == true) {
                       controller.selectedOptionsVideoId.add(option.videoId);
-                      print('option video id added   ${option.videoId}');
                     }
                   }
 
-                  //for last PageView index
-                  //send all selected videoIds
-                  if (controller.helpQuestionList.length ==
+                  if (controller.helpQuestionList.length - 1 ==
                       (controller.currentIndexForPageView.value)) {
-                    final res = await controller.sendAllVideoIds();
+                    final res = await controller
+                        .sendAllHelpQuestionAnswersVideoId();
                     if (res) {
-                      //all videoIds send successfully
-                      // Get.back();
+                      Get.back();
+
+                      final exerciseController =
+                      Get.find<ExerciseScreenController>();
+                      exerciseController.isVideoIdsSaved().then((value) {
+                        if (value) {
+                          exerciseController.getAllSuggestedExercise();
+                        } else {
+                          null;
+                        }
+                      });
+
                       return;
                     } else {
-                      //video ids not send
-
-
                       return;
                     }
                   }
 
-
-                  //pageview navigate
                   controller.currentIndexForPageView.value++;
-                  controller.pageController
-                      .jumpToPage(controller.currentIndexForPageView.value);
+                  controller.pageController.animateToPage(
+                      duration: Duration(milliseconds: 300),
+                      controller.currentIndexForPageView.value,
+                      curve: Curves.linear);
                   print(
                       'go to page ${controller.currentIndexForPageView.value}');
                 } else {
@@ -116,20 +112,39 @@ class HelpQuestionWidget extends StatelessWidget {
                   return;
                 }
               },
-              child: Container(
-                decoration: BoxDecoration(
-                    color: activeButton
-                        ? AppWidgetColor.helpQuestionScreenContinueButton
-                        : AppWidgetColor.selectGoalsScreenNotActiveButton,
-                    borderRadius: BorderRadius.circular(15)),
-                height: 50,
-                width: AppDeviceUtils.getScreenWidth() * 0.9,
-                child: Center(
-                    child: Text(
-                  AppTexts.continueButton,
-                  style: TextStyle(color: Colors.white),
-                )),
-              ),
+              child: Obx(() {
+                if (controller.sendingAnswersLoading.value == true) {
+                  return Container(
+                      decoration: BoxDecoration(
+                          color: activeButton
+                              ? AppWidgetColor.helpQuestionScreenContinueButton
+                              : AppWidgetColor.selectGoalsScreenNotActiveButton,
+                          borderRadius: BorderRadius.circular(15)),
+                      height: 50,
+                      width: AppDeviceUtils.getScreenWidth() * 0.9,
+                      child: Center(child: CircularProgressIndicator()));
+                } else {
+                  return Container(
+                      decoration: BoxDecoration(
+                          color: activeButton
+                              ? AppWidgetColor.helpQuestionScreenContinueButton
+                              : AppWidgetColor.selectGoalsScreenNotActiveButton,
+                          borderRadius: BorderRadius.circular(15)),
+                      height: 50,
+                      width: AppDeviceUtils.getScreenWidth() * 0.9,
+                      child: Obx(() {
+                        if(controller.sendHelpQuestionAnswersLoading.value){
+                          return Center(child: CircularProgressIndicator(color: Colors.white,),);
+                        }
+                        return Center(
+                            child: AutoSizeText(
+                              minFontSize: 8,
+                              AppString.continueButton,
+                              style: AppTextStyle.getStartButton,
+                            ));
+                      }));
+                }
+              }),
             );
           })
         ],

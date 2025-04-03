@@ -202,7 +202,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           backgroundColor: WidgetStatePropertyAll(
                             isButtonEnabled
                                 ? AppWidgetColor.activeBotton
-                                : AppWidgetColor.unactiveButton,
+                                : AppWidgetColor.unactiveBotton,
                           ),
                         ),
                         child: controller.isLoading.value

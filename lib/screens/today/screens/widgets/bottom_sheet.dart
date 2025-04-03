@@ -1,20 +1,19 @@
-
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class BottomSheetWidget extends StatefulWidget {
-
   const BottomSheetWidget({super.key});
 
   @override
   State<BottomSheetWidget> createState() => _BottomSheetWidgetState();
 }
-double _currentValue = 90; // مقدار اولیه نشانگر
+
+double _currentValue = 90;
 
 class _BottomSheetWidgetState extends State<BottomSheetWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       child: SfRadialGauge(
         axes: <RadialAxis>[
           RadialAxis(
@@ -31,21 +30,21 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
             ),
             pointers: <GaugePointer>[
               RangePointer(
-                value: _currentValue, // مقدار نشانگر
+                value: _currentValue,
                 width: 20,
                 color: Colors.blue,
                 enableAnimation: false,
-                enableDragging: true, // فعال کردن قابلیت کشیدن
+                enableDragging: true,
                 onValueChanged: (double value) {
                   setState(() {
-                    _currentValue = value; // به‌روزرسانی مقدار با حرکت نشانگر
+                    _currentValue = value;
                   });
                 },
               ),
             ],
             annotations: <GaugeAnnotation>[
               GaugeAnnotation(
-                widget: Container(
+                widget: SizedBox(
                   child: Text(
                     'Easy',
                     style: TextStyle(fontSize: 16),

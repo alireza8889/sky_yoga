@@ -23,90 +23,86 @@ class GoalLevelThumbnailWidget extends StatelessWidget {
     final bool isLock = (levelStatus == GoalLevelStatus.locked.toString());
     final bool isProcessing =
         (levelStatus == GoalLevelStatus.inProcess.toString());
-final double thumbnailHeight=AppDeviceUtils.getScreenWidth()*0.185;
-final double thumbnailWidth=AppDeviceUtils.getScreenWidth()*0.185;
-final double borderRadius=10;
+    final double thumbnailHeight = AppDeviceUtils.getScreenWidth() * 0.185;
+    final double thumbnailWidth = AppDeviceUtils.getScreenWidth() * 0.185;
+    final double borderRadius = 10;
     return Container(
       height: thumbnailHeight,
       width: thumbnailWidth,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(borderRadius)
-      ),
-      child: Stack(children: [
-        //blur
+          // color: Colors.green,
+          borderRadius: BorderRadius.circular(borderRadius)),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(borderRadius),
+        child: Stack(
+          // Use Stack to layer the image and blur
+          children: [
 
-//image thumbnail
-        Container(
-          height: thumbnailHeight,
-          width: thumbnailWidth,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(borderRadius),
-
-            // color: Colors.orangeAccent,
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(borderRadius),
-            child: Stack( // Use Stack to layer the image and blur
-              children: [
-                CachedNetworkImage(
-                  fit: BoxFit.fill,
-                  imageUrl: imageUrl,
-                ),
-              !isProcessing?  Positioned.fill( // Cover the entire image with the blur
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2), // Adjust blur intensity
-                    child: Container(
-
-                      color: Colors.black.withOpacity(0.3), // Transparent background for the filter
-                    ),
-                  ),
-                ):SizedBox(),
-              ],
+            CachedNetworkImage(
+              fit: BoxFit.fill,
+              imageUrl: imageUrl,
+              height: thumbnailHeight,
+              width: thumbnailWidth,
             ),
-          ),
+
+                 Visibility(visible:  !isProcessing ,
+                  child: Positioned.fill(
+                      // Cover the entire image with the blur
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(
+                            sigmaX: 2, sigmaY: 2), // Adjust blur intensity
+                        child: Container(
+                          color: Colors.black.withOpacity(
+                              0.3), // Transparent background for the filter
+                        ),
+                      ),
+                    ),
+                ),
+
+            !isProcessing
+                ? Container(
+              height: thumbnailHeight,
+              width: thumbnailWidth,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(borderRadius),
+                color: Colors.transparent,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  isPassed
+                      ? Icon(
+                    Icons.check_circle_outline,
+                    color: Colors.white,
+                  )
+                      : isLock
+                      ? Icon(
+                    Iconsax.lock,
+                    color: Colors.white,
+                  )
+                      : SizedBox(),
+                  AutoSizeText(
+                      minFontSize: 7,
+                      style: TextStyle(fontSize: 14, color: Colors.white),
+                      'Level${levelNumber.toString()}')
+                ],
+              ),
+            )
+                : SizedBox(),
+            isPassed || isLock
+                ? Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(borderRadius),
+              ),
+              height: thumbnailHeight,
+              width: thumbnailWidth,
+              child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5)),
+            )
+                : SizedBox(),
+          ],
         ),
-
-        !isProcessing
-            ? Container(
-          height: thumbnailHeight,
-          width: thumbnailWidth,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-
-            color: Colors.transparent,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              isPassed
-                  ? Icon(Icons.check_circle_outline,color: Colors.white,)
-                  : isLock
-                  ? Icon(Iconsax.lock,color: Colors.white,)
-                  : SizedBox(),
-              AutoSizeText(
-                minFontSize: 7,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.white
-                  ),
-                  'Level${levelNumber.toString()}')
-            ],
-          ),
-        )
-            : SizedBox(),
-        isPassed || isLock
-            ? Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(borderRadius),
-
-          ),
-          height: thumbnailHeight,
-          width: thumbnailWidth,
-          child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5)),
-        )
-            : SizedBox(),
-      ]),
+      ),
     );
   }
 }

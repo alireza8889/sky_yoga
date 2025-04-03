@@ -5,6 +5,7 @@ import 'package:skyyoga/components/text_style.dart';
 import 'package:skyyoga/gen/assets.gen.dart';
 import 'package:skyyoga/res/colors.dart';
 import 'package:skyyoga/res/string.dart';
+import 'package:skyyoga/screens/profile_screen/privacy_policy_screen/privacy_policy_screen.dart';
 import 'package:skyyoga/widget/route_page_transaction.dart';
 
 class AccountAutoAuthentication extends StatelessWidget {
@@ -22,7 +23,7 @@ class AccountAutoAuthentication extends StatelessWidget {
     return Container(
       constraints: BoxConstraints(
         maxWidth: size.width * 0.27,
-        maxHeight: size.height * 0.07,
+        maxHeight: size.width * 0.15,
       ),
       decoration: BoxDecoration(
         color: AppWidgetColor.bgColorAuth,
@@ -36,7 +37,7 @@ class AccountAutoAuthentication extends StatelessWidget {
       child: Center(
         child: SvgPicture.asset(
           svg,
-          height: size.height * 0.045,
+          height: size.width * 0.1,
         ),
       ),
     );
@@ -373,27 +374,35 @@ class SecurityTextWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: size.height * 0.05,
-      child: Text.rich(
-        textAlign: TextAlign.center,
-        TextSpan(
-          text: AppString.securityText1,
-          style: AppTextStyle.accountLoginSignUpAuth,
-          children: <InlineSpan>[
-            TextSpan(
-              text: AppString.securityText2,
-              style: AppTextStyle.loginOrSignUpAuth,
-            ),
-            TextSpan(
-              text: AppString.securityText3,
-              style: AppTextStyle.accountLoginSignUpAuth,
-            ),
-            TextSpan(
-              text: AppString.securityText4,
-              style: AppTextStyle.loginOrSignUpAuth,
-            ),
-          ],
+    return GestureDetector(
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => PrivacyPolicyScreen(),
+        ),
+      ),
+      child: SizedBox(
+        height: size.height * 0.06,
+        child: Text.rich(
+          textAlign: TextAlign.center,
+          TextSpan(
+            text: AppString.securityText1,
+            style: AppTextStyle.accountLoginSignUpAuth,
+            children: <InlineSpan>[
+              TextSpan(
+                text: AppString.securityText2,
+                style: AppTextStyle.loginOrSignUpAuth,
+              ),
+              TextSpan(
+                text: AppString.securityText3,
+                style: AppTextStyle.accountLoginSignUpAuth,
+              ),
+              TextSpan(
+                text: AppString.securityText4,
+                style: AppTextStyle.loginOrSignUpAuth,
+              ),
+            ],
+          ),
         ),
       ),
     );

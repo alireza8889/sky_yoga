@@ -1,72 +1,76 @@
-import 'dart:ui';
+import 'dart:ui'; // برای استفاده از ImageFilter
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:skyyoga/components/text_strings.dart';
 import 'package:skyyoga/components/text_style.dart';
 import 'package:skyyoga/res/colors.dart';
+import 'package:skyyoga/res/string.dart';
+import 'package:skyyoga/utils/device_utility.dart';
 
 class SuggestedExerciseWidgetItem extends StatelessWidget {
   final String imageUrl;
   final String title;
   final String description;
+  final String props;
+  final String duration;
+
 
   const SuggestedExerciseWidgetItem(
       {super.key,
-      required this.title,
-      required this.description,
-      required this.imageUrl});
+        required this.title,
+        required this.description,
+        required this.imageUrl, required this.props, required this.duration});
 
   @override
   Widget build(BuildContext context) {
-    return // Inside the Column's children:
-        Container(
-          // width: 200,
-          child: Stack(children: [
-                Positioned.fill(
-          // Cover the container with the blur
-          child: ClipRRect(
-            // Clip to the container's rounded corners
-            borderRadius: BorderRadius.circular(15),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(
-                  sigmaX: 15.0, sigmaY: 15.0), // Adjust blur intensity
-              child: Container(
-                color: Colors.white.withOpacity(0.1), // Necessary for blur to show
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.transparent, // حذف پس‌زمینه اصلی
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Stack(
+        children: [
+          // پس‌زمینه blur
+          Positioned.fill(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 30.0, sigmaY: 30.0), // تنظیم شدت blur
+                child: Container(
+                  color: Colors.black.withOpacity(0.05), // رنگ پس‌زمینه blur
+                ),
               ),
             ),
           ),
-                ),
-                Container(
-
-          decoration: BoxDecoration(
-
-              color: Colors.transparent, borderRadius: BorderRadius.circular(15))
-          ,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 10),
+          // محتوای ویجت
+          Padding(
+            padding:  EdgeInsets.symmetric(horizontal:AppDeviceUtils.getScreenWidth()*0.03, vertical: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
-                  flex: 3,
+                  flex: 6,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 0.0),
                     child: Container(
                       width: double.infinity,
                       decoration: BoxDecoration(),
-                      child: CachedNetworkImage(
-                        imageUrl: imageUrl,
-                        fit: BoxFit.fill,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: CachedNetworkImage(
+                          imageUrl: imageUrl,
+                          fit: BoxFit.fill,
+                        ),
                       ),
                     ),
                   ),
                 ),
+                Spacer(),
                 Expanded(
-                  flex: 4,
+                  flex: 8,
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding:  EdgeInsets.symmetric(horizontal:AppDeviceUtils.getScreenWidth()*0.01),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -78,52 +82,51 @@ class SuggestedExerciseWidgetItem extends StatelessWidget {
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style:
-                                  AppTextStyle.suggestedExerciseItemTilteStyle),
+                              AppTextStyle.suggestedExerciseItemTilteStyle),
                         ),
                         Expanded(
                           flex: 3,
                           child: AutoSizeText(
                             textAlign: TextAlign.start,
                             overflow: TextOverflow.ellipsis,
-                            minFontSize: 10,
-
+                            minFontSize: 12,
                             maxLines: 3,
-                            description, // Add your description
-                            style: AppTextStyle.exerciseScreenDescriptionStyle,
+                            '$duration min $props\n$description',
+                            style: AppTextStyle.suggestedExerciseScreenDescriptionStyle,
                           ),
                         ),
                       ],
                     ),
                   ),
                 ),
-                Expanded(
+                Flexible(
+            flex: 2,
                   child: GestureDetector(
                     onTap: () {},
                     child: Container(
-
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(15),
                         color: AppWidgetColor.exerciseScreenGetStartButton,
                       ),
                       child: Center(
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Text(
-                            AppTexts.getStartButton,
-                            style:
-                                TextStyle(color: AppTextColor.getStartButtonText),
+                          padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                          child: AutoSizeText(
+                            maxLines: 1,
+                            minFontSize: 12,
+                            AppString.getStartButton,
+                            style: AppTextStyle.getStartButton,
                           ),
                         ),
                       ),
                     ),
                   ),
                 ),
-
               ],
             ),
           ),
-                ),
-              ]),
-        );
+        ],
+      ),
+    );
   }
 }

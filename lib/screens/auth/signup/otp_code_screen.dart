@@ -202,7 +202,7 @@ class _OtpCodeScreenState extends State<OtpCodeScreen> {
                               backgroundColor: WidgetStatePropertyAll(
                                 isButtonEnabled
                                     ? AppWidgetColor.activeBotton
-                                    : AppWidgetColor.unactiveButton,
+                                    : AppWidgetColor.unactiveBotton,
                               ),
                             ),
                             child: controller.isLoading.value

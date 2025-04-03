@@ -1,105 +1,147 @@
+
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart' show Obx;
+import 'package:iconsax/iconsax.dart';
 import 'package:skyyoga/components/text_style.dart';
 import 'package:skyyoga/res/colors.dart';
+import 'package:skyyoga/screens/exercise/controllers/exercise_controllers.dart';
 import 'package:skyyoga/screens/exercise/models/past_exercise_models.dart';
+import 'package:skyyoga/utils/device_utility.dart';
 
 class PastExerciseWidget extends StatelessWidget {
   final PastExerciseModel pastExerciseModel;
-  const PastExerciseWidget({super.key, required this.pastExerciseModel});
+  final ExerciseScreenController controller;
+
+  const PastExerciseWidget({super.key, required this.pastExerciseModel, required this.controller});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-
       margin: EdgeInsets.only(bottom: 8),
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
-      border: Border.all(color: Colors.grey)
-      ),
-   
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(color: Colors.grey)),
       child: Padding(
-        padding: const EdgeInsets.all(16.0), // Padding inside the card
+        padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 16),
         child: Column(
-          crossAxisAlignment:
-              CrossAxisAlignment.start, // Align content to the left
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            // Top Section
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                // Image
-                Expanded(
-                  flex: 2,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: CachedNetworkImage(
-                        fit: BoxFit.fill,
-                        imageUrl: pastExerciseModel.imageUrl),
+            Container(
+              // color: Colors.orange,
+              height: AppDeviceUtils.getScreenheight()*0.09,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Expanded(
+                    flex: 3,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: CachedNetworkImage(
+                          height: AppDeviceUtils.getScreenheight()*0.08,
+                          fit: BoxFit.fill, imageUrl: pastExerciseModel.thumbnail),
+                    ),
                   ),
-                ),
-                SizedBox(width: 16.0), // Spacing between image and text
-                Expanded(
-                  flex: 4,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      // Number and Star
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            '#${pastExerciseModel.number}',
-                            style:AppTextStyle.exerciseScreenDescriptionStyle,
+                  SizedBox(width: 7.0),
+                  Expanded(
+                    flex: 7,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+
+                                Text(
+                                  '#${pastExerciseModel.id}',
+                                  style: AppTextStyle.exerciseScreenDescriptionStyle,
+                                ),
+                                Container(
+                                  // color: Colors.orange,
+                                  height:AppDeviceUtils.getScreenheight()*0.03,
+                                  child:
+                                AutoSizeText(
+                                    pastExerciseModel.title,
+                                    style: AppTextStyle.pastExerciseWidgetTitleStyle
+                                ),),
+                                Container(
+                                  // color: Colors.orange,
+                                  height:AppDeviceUtils.getScreenheight()*0.02,
+                                  child: AutoSizeText(
+                                      minFontSize: 7,
+                                      '${pastExerciseModel.duration.toString()} min',
+                                      style: AppTextStyle.pastExerciseWidgetTitleStyle
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                          ],
+                        ),
+
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Obx(() {
+                      return  GestureDetector(
+                        onTap: (){
+
+                          pastExerciseModel.isLiked.value=!pastExerciseModel.isLiked.value;
+                      if(   pastExerciseModel.isLiked.value==true){
+                        controller.addIdToList(pastExerciseModel.id);
+                      }else{
+                        controller.removeIdFromList(pastExerciseModel.id);
+                      }
+
+                        },
+                        child: SvgPicture.asset(
+
+                            !pastExerciseModel.isLiked.value?'assets/img/svg/star.svg':'assets/img/svg/star-1.svg',
+                          height:30 ,
+                          width: 30,
                           ),
 
-                          Icon(!pastExerciseModel.isLiked
-                              ? Icons.star_border
-                              : Icons.star,size: 30,), // Star icon
-                        ],
-                      ),
-                      // Title and Duration
-                      Text(
-                        pastExerciseModel.title,
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Text(
-                        '${pastExerciseModel.time.toString()} min',
-                        style: TextStyle(
-                          fontSize: 14.0,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ],
+                      );
+
+                      // child: Icon(
+                      //       !pastExerciseModel.isLiked.value
+                      //           ? Iconsax.star4
+                      //           : Iconsax.star1,
+                      //       size: 28,),
+                      // );
+
+
+
+                    }),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-            SizedBox(height: 1.0), // Spacing between sections
-
-            // Middle Section
-            Text(
-              pastExerciseModel.description,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style:AppTextStyle.pastExerciseScreenDescriptionStyle
-            ),
-            SizedBox(height: 5.0), // Spacing between sections
-
-            // Bottom Section
+            SizedBox(height: 10.0),
+            Text(pastExerciseModel.description,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: AppTextStyle.pastExerciseWidgetDescriptionStyle),
+            SizedBox(height: 8.0),
             LinearProgressIndicator(
-              value: pastExerciseModel.completedClass /
-                  pastExerciseModel
-                      .allClass, // Replace with your progress value (0.0 to 1.0)
+              value:
+              pastExerciseModel.watchedNumber / pastExerciseModel.sequenceLength,
               backgroundColor: Colors.grey[300],
-              valueColor: AlwaysStoppedAnimation<Color>(
-                  Colors.blue), // Customize progress color
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
             ),
-            SizedBox(height: 8.0), // Spacing between progress bar and text
+            SizedBox(height: 8.0),
             Text(
-              '${pastExerciseModel.completedClass.toString()}/${pastExerciseModel.allClass.toString()} Classes complete',
+              '${pastExerciseModel.watchedNumber
+                  .toString()}/${pastExerciseModel.sequenceLength
+                  .toString()} Classes complete',
               style: TextStyle(
                 fontSize: 14.0,
                 color: AppTextColor.exerciseScreenDescription,

@@ -25,7 +25,7 @@ class AuthSignUpScreen extends StatelessWidget {
                 top: size.height * 0.04,
                 right: size.width * 0.05,
                 left: size.width * 0.05,
-                bottom: size.height * 0.04,
+                bottom: size.height * 0.03,
               ),
               child: Column(
                 spacing: size.height * 0.01,

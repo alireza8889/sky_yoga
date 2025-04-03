@@ -15,6 +15,7 @@ class AppTexts {
   static const String progressScreenDescription='You can track your progress here once you start practicing';
   static const String progressScreenGoalsTitle='Progress towards goals' ;
   static const String progressScreenGoalsDescription='Tell us what you can do and we`ll help you grow';
+  static const String setGoalsButton='Set Goals';
 
 //today
   static const String setMoodButton='Set Mood' ;

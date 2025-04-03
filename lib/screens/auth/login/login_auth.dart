@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:skyyoga/gen/assets.gen.dart';
 import 'package:skyyoga/res/colors.dart';
 import 'package:skyyoga/res/string.dart';
@@ -6,8 +7,15 @@ import 'package:skyyoga/screens/auth/login/login_screen.dart';
 import 'package:skyyoga/screens/auth/login/widget/widget.dart';
 import 'package:skyyoga/screens/auth/signup/signup_auth.dart';
 
-class AuthLoginScreen extends StatelessWidget {
+class AuthLoginScreen extends StatefulWidget {
   const AuthLoginScreen({super.key});
+
+  @override
+  State<AuthLoginScreen> createState() => _AuthLoginScreenState();
+}
+
+class _AuthLoginScreenState extends State<AuthLoginScreen> {
+  // final googleLoginController = Get.put(AccountsController());
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +33,7 @@ class AuthLoginScreen extends StatelessWidget {
                 top: size.height * 0.04,
                 right: size.width * 0.05,
                 left: size.width * 0.05,
-                bottom: size.height * 0.04,
+                bottom: size.height * 0.03,
               ),
               child: Column(
                 spacing: size.height * 0.01,
@@ -40,9 +48,16 @@ class AuthLoginScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         spacing: size.width * 0.02,
                         children: [
-                          AccountAutoAuthentication(
-                            size: size,
-                            svg: Assets.img.svg.googleIcon,
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                // googleLoginController.getUrlGoogleAccount();
+                              });
+                            },
+                            child: AccountAutoAuthentication(
+                              size: size,
+                              svg: Assets.img.svg.googleIcon,
+                            ),
                           ),
                           AccountAutoAuthentication(
                             size: size,

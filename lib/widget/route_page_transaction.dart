@@ -36,8 +36,7 @@ class SlideRightToLeftRoute extends PageRouteBuilder {
 }
 
 void navigatePushWithFadeTransition(BuildContext context, Widget page) {
-  Navigator.push(
-    context,
+  Navigator.of(context).push(
     PageRouteBuilder(
       transitionDuration: Duration(milliseconds: 500),
       pageBuilder: (_, __, ___) => page,
@@ -53,8 +52,7 @@ void navigatePushWithFadeTransition(BuildContext context, Widget page) {
 
 void navigatePushReplacementWithFadeTransition(
     BuildContext context, Widget page) {
-  Navigator.pushReplacement(
-    context,
+  Navigator.of(context).pushReplacement(
     PageRouteBuilder(
       transitionDuration: Duration(milliseconds: 500),
       pageBuilder: (_, __, ___) => page,

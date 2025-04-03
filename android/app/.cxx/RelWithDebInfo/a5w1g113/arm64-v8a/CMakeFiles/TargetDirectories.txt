@@ -1,0 +1,2 @@
+/Users/alireza/Documents/GitHub/sky_yoga/android/app/.cxx/RelWithDebInfo/a5w1g113/arm64-v8a/CMakeFiles/edit_cache.dir
+/Users/alireza/Documents/GitHub/sky_yoga/android/app/.cxx/RelWithDebInfo/a5w1g113/arm64-v8a/CMakeFiles/rebuild_cache.dir

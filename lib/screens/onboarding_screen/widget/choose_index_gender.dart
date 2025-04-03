@@ -18,17 +18,17 @@ class ChooseIndexGender extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       constraints: BoxConstraints(
-        maxHeight: size.height * 0.051,
+        maxHeight: size.height * 0.06,
         maxWidth: size.width * 0.27,
       ),
       decoration: BoxDecoration(
         color: isActive
-            ? AppWidgetColor.bgSelectedChooseGender
-            : AppWidgetColor.bgOnSelectedChooseGender,
+            ? AppWidgetColor.bgSelectedChoose
+            : AppWidgetColor.bgOnSelectedChoose,
         border: Border.all(
             color: isActive
-                ? AppWidgetColor.borderSelectedChooseGender
-                : AppWidgetColor.borderOnSelectedChooseGender),
+                ? AppWidgetColor.borderSelectedChoose
+                : AppWidgetColor.borderOnSelectedChoose),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Center(

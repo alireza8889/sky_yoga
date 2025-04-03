@@ -14,8 +14,8 @@ class MultiBoxSelected extends StatelessWidget {
 
   final Size size;
   final List<String> selectedItem;
-  final List<String> filings;
-  final int i;
+  final Map<String, String> filings;
+  final String i;
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +27,13 @@ class MultiBoxSelected extends StatelessWidget {
         minHeight: size.height * 0.053,
       ),
       decoration: BoxDecoration(
-        color: selectedItem.contains(filings[i])
-            ? AppWidgetColor.bgSelectedChooseGender
-            : AppWidgetColor.bgOnSelectedChooseGender,
+        color: selectedItem.contains(i)
+            ? AppWidgetColor.bgSelectedChoose
+            : AppWidgetColor.bgOnSelectedChoose,
         border: Border.all(
-            color: selectedItem.contains(filings[i])
-                ? AppWidgetColor.borderSelectedChooseGender
-                : AppWidgetColor.borderOnSelectedChooseGender),
+            color: selectedItem.contains(i)
+                ? AppWidgetColor.borderSelectedChoose
+                : AppWidgetColor.borderOnSelectedChoose),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Row(
@@ -52,12 +52,11 @@ class MultiBoxSelected extends StatelessWidget {
                     bottom: size.height * 0.01,
                   ),
                   child: AutoSizeText(
-                    filings[i],
+                    filings[i].toString(),
                     minFontSize: 8,
                     maxLines: 2,
                     style: AppTextStyle.onboardingChooseIndexTextStyle.apply(
-                        fontWeightDelta:
-                            selectedItem.contains(filings[i]) ? 2 : 1),
+                        fontWeightDelta: selectedItem.contains(i) ? 2 : 1),
                   ),
                 ),
               ),
@@ -95,12 +94,12 @@ class SoloBoxSelected extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         color: isActive
-            ? AppWidgetColor.bgSelectedChooseGender
-            : AppWidgetColor.bgOnSelectedChooseGender,
+            ? AppWidgetColor.bgSelectedChoose
+            : AppWidgetColor.bgOnSelectedChoose,
         border: Border.all(
             color: isActive
-                ? AppWidgetColor.borderSelectedChooseGender
-                : AppWidgetColor.borderOnSelectedChooseGender),
+                ? AppWidgetColor.borderSelectedChoose
+                : AppWidgetColor.borderOnSelectedChoose),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Row(
