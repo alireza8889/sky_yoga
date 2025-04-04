@@ -75,4 +75,6 @@ class ApiUrlConstant {
 
   static const getAllMoodsForSelectMoodScreen=
       '$baseUrl/api/v1/users/choices/feelings/';
+  static const getAllBodyPartPainType=
+      '$baseUrl/api/v1/users/body-parts/';
 }

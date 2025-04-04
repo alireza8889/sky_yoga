@@ -1,10 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:delayed_widget/delayed_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show SystemChrome, SystemUiOverlayStyle;
 import 'package:iconsax/iconsax.dart';
 import 'package:skyyoga/components/text_style.dart';
-import 'package:skyyoga/controller/exercise_controllers/help_question_screen_controller.dart';
 import 'package:skyyoga/res/colors.dart';
 import 'package:skyyoga/res/string.dart';
 import 'package:skyyoga/screens/exercise/controllers/help_question_screen_controller.dart' show HelpQuestionScreenController;
@@ -185,7 +183,7 @@ class ExerciseScreen extends StatelessWidget {
                     ? AppDeviceUtils.getScreenheight() * 0.33
                     : AppDeviceUtils.getScreenheight() * 0.31,
                 child: exerciseController.pastExerciseLoading.value
-                    ? Container(
+                    ? SizedBox(
                     height: AppDeviceUtils.getScreenWidth() * 0.1,
                     width: AppDeviceUtils.getScreenWidth() * 0.1,
                     child: LoadingWidget(

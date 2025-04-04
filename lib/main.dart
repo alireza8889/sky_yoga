@@ -13,7 +13,6 @@ void main() async {
   Get.put(NetworkManager());
 
   await authController.checkLoginStatus();
-  WidgetsFlutterBinding.ensureInitialized();
 
   runApp(
     const MyApp(),

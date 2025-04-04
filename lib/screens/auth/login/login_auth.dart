@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:skyyoga/gen/assets.gen.dart';
 import 'package:skyyoga/res/colors.dart';
 import 'package:skyyoga/res/string.dart';

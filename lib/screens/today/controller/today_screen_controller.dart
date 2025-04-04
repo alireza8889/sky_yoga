@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:ui';
 
 import 'package:auto_size_text/auto_size_text.dart';
@@ -348,6 +347,7 @@ class TodayScreenController extends GetxController {
     return difference.inHours >= 24;
   }
 
+
   void addQuestion4ColumnChildren() async {
     question4ColumnChildren.clear();
 
@@ -542,7 +542,7 @@ class TodayScreenController extends GetxController {
                             alignment: Alignment.bottomCenter,
                             // تنظیم تراز برای قرار دادن دکمه در پایین
                             children: [
-                              Container(
+                              SizedBox(
                                 height:
                                     (AppDeviceUtils.getScreenheight() * 0.18) +
                                         50,
@@ -683,7 +683,7 @@ class TodayScreenController extends GetxController {
                                   style: AppTextStyle
                                       .todayScreenBottomSheetQuestion),
                             ),
-                            Container(
+                            SizedBox(
                               height: AppDeviceUtils.getScreenheight() * 0.18,
                               child: Obx(() {
                                 return Padding(

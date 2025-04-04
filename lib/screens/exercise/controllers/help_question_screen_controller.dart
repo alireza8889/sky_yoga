@@ -1,10 +1,8 @@
-import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:skyyoga/components/api_constant.dart';
-import 'package:skyyoga/controller/auth_controller/auth_controller.dart';
 import 'package:skyyoga/screens/exercise/models/help_question_model.dart';
 import 'package:skyyoga/screens/exercise/models/help_question_option_model.dart';
 import 'package:skyyoga/services/dio_services.dart';
@@ -147,10 +145,10 @@ class HelpQuestionScreenController extends GetxController {
         token,
       );
       print('response for send help questions answer:${response.data}');
-      if(response.statusCode==201)
-
-      // Return the response object
+      if(response.statusCode==201) {
+        // Return the response object
         print('statusCode for send help questions answer');
+      }
       print('All video ids for help question sent successfully');
 
       return true;

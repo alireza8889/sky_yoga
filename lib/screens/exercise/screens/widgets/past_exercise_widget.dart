@@ -4,7 +4,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart' show Obx;
-import 'package:iconsax/iconsax.dart';
 import 'package:skyyoga/components/text_style.dart';
 import 'package:skyyoga/res/colors.dart';
 import 'package:skyyoga/screens/exercise/controllers/exercise_controllers.dart';
@@ -29,7 +28,7 @@ class PastExerciseWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Container(
+            SizedBox(
               // color: Colors.orange,
               height: AppDeviceUtils.getScreenheight()*0.09,
               child: Row(
@@ -62,7 +61,7 @@ class PastExerciseWidget extends StatelessWidget {
                                   '#${pastExerciseModel.id}',
                                   style: AppTextStyle.exerciseScreenDescriptionStyle,
                                 ),
-                                Container(
+                                SizedBox(
                                   // color: Colors.orange,
                                   height:AppDeviceUtils.getScreenheight()*0.03,
                                   child:
@@ -70,7 +69,7 @@ class PastExerciseWidget extends StatelessWidget {
                                     pastExerciseModel.title,
                                     style: AppTextStyle.pastExerciseWidgetTitleStyle
                                 ),),
-                                Container(
+                                SizedBox(
                                   // color: Colors.orange,
                                   height:AppDeviceUtils.getScreenheight()*0.02,
                                   child: AutoSizeText(

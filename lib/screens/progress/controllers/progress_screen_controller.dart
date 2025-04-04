@@ -571,7 +571,7 @@ class ProgressScreenController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     getChartData();
-    // getAllGoalLevels();
+    getAllGoalLevels();
     super.onInit();
   }
 }

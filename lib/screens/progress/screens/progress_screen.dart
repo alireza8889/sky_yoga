@@ -3,7 +3,6 @@ import 'package:delayed_widget/delayed_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:skyyoga/res/string.dart';
 import 'package:skyyoga/screens/auth/login/widget/widget.dart';
-import 'package:skyyoga/controller/progress_controllers/progress_controller.dart';
 import 'package:skyyoga/screens/progress/screens/widgets/chart_lable_widget.dart';
 import 'package:skyyoga/screens/progress/screens/widgets/goals_levels_widget.dart';
 import 'package:skyyoga/widget/loading_widget.dart';

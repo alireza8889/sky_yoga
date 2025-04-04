@@ -3,14 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:skyyoga/components/text_style.dart';
 import 'package:skyyoga/gen/assets.gen.dart';
 import 'package:skyyoga/res/string.dart';
-import 'package:skyyoga/controller/today_controller/today_screen_controller.dart';
 import 'package:skyyoga/screens/today/screens/mood_selection_screen.dart';
 
 import '../../../res/colors.dart';
 import '../../../utils/device_utility.dart';
 import 'package:get/get.dart';
 
-import '../../../utils/helper_functions.dart';
 import '../controller/today_screen_controller.dart';
 
 class TodayScreen extends StatelessWidget {
